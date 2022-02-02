@@ -5,7 +5,7 @@ Misskey用のAiベースのBotです。
 - 自動投稿の内容
 - pingに対する返答の内容
 - 自動返信の内容
-- ゴママヨに反応[ここから持ってきた](https://github.com/ThinaticSystem/honi)
+- ゴママヨに反応([ここ](https://github.com/ThinaticSystem/honi)から持ってきた)
 
 ## 導入方法
 > Node.js と npm と MeCab (オプション) がインストールされている必要があります。
