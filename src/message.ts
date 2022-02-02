@@ -30,6 +30,10 @@ export default class Message {
 		return this.messageOrNote.text;
 	}
 
+	public get renotedText(): string | null {
+		return this.messageOrNote.renote.text
+	}
+
 	public get quoteId(): string | null {
 		return this.messageOrNote.renoteId;
 	}
