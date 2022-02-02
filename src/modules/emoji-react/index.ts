@@ -7,6 +7,8 @@ import Module from '@/module';
 import Stream from '@/stream';
 import includes from '@/utils/includes';
 
+const gomamayo = require('gomamayo-js')
+
 export default class extends Module {
 	public readonly name = 'emoji-react';
 
@@ -36,6 +38,7 @@ export default class extends Module {
 			});
 		};
 
+		if (await gomamayo.find(note.text)) return react(':gomamayo:');
 		if (includes(note.text, ['ぬるきゃっとちゃん','Nullcat chan'])) return react(':bibibi_nullcat:');
 		if (includes(note.text, ['つらい','つらすぎ','死にたい','つかれた','疲れた','しにたい','きえたい','消えたい','やだ','いやだ','なきそう','泣きそう','辛い','ねむい','ねむたい','ねたい'])) return react(':nadenade_neko:');
 		
