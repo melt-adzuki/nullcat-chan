@@ -2,9 +2,10 @@
 Misskey用のAiベースのBotです。
 
 ## 大きな変更点
-自動投稿の内容<br>
-pingに対する返答の内容<br>
-自動返信の内容<br>
+- 自動投稿の内容
+- pingに対する返答の内容
+- 自動返信の内容
+- ゴママヨに反応[ここから持ってきた](https://github.com/ThinaticSystem/honi)
 
 ## 導入方法
 > Node.js と npm と MeCab (オプション) がインストールされている必要があります。
