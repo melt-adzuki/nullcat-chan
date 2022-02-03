@@ -2,6 +2,7 @@
 	"_v": "1.5.0",
 	"main": "./built/index.js",
 	"scripts": {
+		"poststart": "npm run build",
 		"start": "node ./built",
 		"build": "tsc",
 		"test": "jest"
@@ -25,6 +26,7 @@
 		"memory-streams": "0.1.3",
 		"misskey-reversi": "0.0.5",
 		"module-alias": "2.2.2",
+		"node-fetch": "2.6.7",
 		"promise-retry": "2.0.1",
 		"random-seed": "0.3.0",
 		"reconnecting-websocket": "4.4.0",
@@ -36,7 +38,8 @@
 		"twemoji-parser": "13.1.0",
 		"typescript": "4.3.5",
 		"uuid": "8.3.2",
-		"ws": "7.5.2"
+		"ws": "7.5.2",
+		"zod": "3.11.6"
 	},
 	"devDependencies": {
 		"@koa/router": "9.4.0",

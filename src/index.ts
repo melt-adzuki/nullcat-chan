@@ -32,6 +32,7 @@ import SleepReportModule from './modules/sleep-report';
 import NotingModule from './modules/noting';
 import ReminderModule from './modules/reminder';
 import GomamayoModule from './modules/gomamayo';
+import GitHubStatusModule from './modules/github-status'
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -84,6 +85,7 @@ promiseRetry(retry => {
 		new NotingModule(),
 		new ReminderModule(),
 		new GomamayoModule(),
+		new GitHubStatusModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));
