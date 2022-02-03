@@ -45,7 +45,7 @@ export default class extends Module {
 				this.indicator = result.data.status.indicator
 				this.description = result.data.status.description
 
-				await this.checkStatus()
+				this.checkStatus()
 			} else {
 				console.warn("GitHub Status Module: Validation failed.")
 			}
