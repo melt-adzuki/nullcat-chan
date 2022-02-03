@@ -50,6 +50,7 @@ export default class extends Module {
 
 		} catch (error) {
 			console.warn("GitHub Status Module: Failed to fetch status from GitHub.")
+			console.warn(error)
 		}
 	}
 
