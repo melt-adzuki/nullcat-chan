@@ -22,7 +22,7 @@ export default class extends Module {
 	public install() {
 		if (!config.serverMonitoring) return {}
 
-		setInterval(this.getStatus, 60 * 60)
+		setInterval(this.getStatus, 60 * 60 * 1000)
 
 		return {}
 	}
