@@ -229,7 +229,7 @@ export default class 藍 {
 			noteId: msg.replyId
 		});
 
-		let reaction: string | null = 'love';
+		let reaction: string | null = ':love_nullcat_v2:';
 		let immediate: boolean = false;
 
 		//#region
