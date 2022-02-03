@@ -56,7 +56,7 @@ export default class extends Module {
 	}
 
 	@autobind
-	private async checkStatus() {
+	private checkStatus() {
 		if (this.indicator === "none") return
 
 		this.warn()
