@@ -12,12 +12,6 @@ export default class extends Module {
 	private description = ""
 
 	private readonly schema = z.object({
-		page: z.object({
-			id: z.string(),
-			name: z.string(),
-			url: z.string().url(),
-			updatedAt: z.string(),
-		}),
 		status: z.object({
 			description: z.string(),
 			indicator: z.string(),
