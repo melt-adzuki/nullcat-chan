@@ -48,6 +48,7 @@ export default class extends Module {
 				this.checkStatus()
 			} else {
 				console.warn("GitHub Status Module: Validation failed.")
+				console.warn(result.error)
 			}
 
 		} catch (error) {
