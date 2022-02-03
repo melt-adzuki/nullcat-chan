@@ -3,6 +3,7 @@ import fetch from "node-fetch"
 import { z } from "zod"
 
 import Module from "@/module"
+import Message from "@/message"
 import config from "@/config"
 
 export default class extends Module {
@@ -20,11 +21,13 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		if (!config.serverMonitoring) return {}
+		if (config.serverMonitoring) {
+			setInterval(this.getStatus, 60 * 60 * 1000)
+		}
 
-		setInterval(this.getStatus, 60 * 60 * 1000)
-
-		return {}
+		return {
+			mentionHook: this.mentionHook
+		}
 	}
 
 	@autobind
@@ -62,5 +65,19 @@ export default class extends Module {
 		this.ai.post({
 			text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
 		})
+	}
+
+	@autobind
+	private async mentionHook(msg: Message) {
+		if (msg.text?.includes("GitHub Status")) {
+
+			msg.reply(`indicator: ${this.indicator}\ndescription: ${this.description}`, {
+				immediate: true,
+			})
+			return true
+
+		} else {
+			return false
+		}
 	}
 }
