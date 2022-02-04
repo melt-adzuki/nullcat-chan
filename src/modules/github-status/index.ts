@@ -9,15 +9,15 @@ import config from "@/config"
 export default class extends Module {
 	public readonly name = "github-status"
 
-	private indicator = "none"
-	private description = ""
-
 	private readonly schema = z.object({
 		status: z.object({
 			description: z.string(),
-			indicator: z.string(),
+			indicator: z.enum(["none", "minor", "major", "critical"]),
 		}),
 	})
+
+	private indicator: z.infer<typeof this.schema>["status"]["indicator"]
+	private description: z.infer<typeof this.schema>["status"]["description"]
 
 	@autobind
 	public install() {
@@ -56,9 +56,16 @@ export default class extends Module {
 
 	@autobind
 	private checkStatus() {
-		if (this.indicator === "none") return
-
-		this.warn()
+		switch (this.indicator) {
+			case "minor":
+			case "major":
+			case "critical":
+				this.warn()
+				break
+			
+			default:
+				break
+		}
 	}
 
 	@autobind
