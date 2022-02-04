@@ -44,12 +44,12 @@ export default class extends Module {
 
 				this.checkStatus()
 			} else {
-				console.warn("GitHub Status Module: Validation failed.")
+				this.log("Validation failed.")
 				console.warn(result.error)
 			}
 
 		} catch (error) {
-			console.warn("GitHub Status Module: Failed to fetch status from GitHub.")
+			this.log("Failed to fetch status from GitHub.")
 			console.warn(error)
 		}
 	}
@@ -66,6 +66,8 @@ export default class extends Module {
 		this.ai.post({
 			text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
 		})
+
+		this.log("Report posted.")
 	}
 
 	@autobind
