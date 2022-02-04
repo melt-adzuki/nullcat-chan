@@ -3,28 +3,31 @@ import fetch from "node-fetch"
 import { z } from "zod"
 
 import Module from "@/module"
+import Message from "@/message"
 import config from "@/config"
 
 export default class extends Module {
 	public readonly name = "github-status"
 
-	private indicator = "none"
-	private description = ""
-
 	private readonly schema = z.object({
 		status: z.object({
 			description: z.string(),
-			indicator: z.string(),
+			indicator: z.enum(["none", "minor", "major", "critical"]),
 		}),
 	})
 
+	private indicator: z.infer<typeof this.schema>["status"]["indicator"] = "none"
+	private description: z.infer<typeof this.schema>["status"]["description"] = ""
+
 	@autobind
 	public install() {
-		if (!config.serverMonitoring) return {}
+		if (config.serverMonitoring) {
+			setInterval(this.getStatus, 60 * 60 * 1000)
+		}
 
-		setInterval(this.getStatus, 60 * 60 * 1000)
-
-		return {}
+		return {
+			mentionHook: this.mentionHook
+		}
 	}
 
 	@autobind
@@ -41,20 +44,28 @@ export default class extends Module {
 
 				this.checkStatus()
 			} else {
-				console.warn("GitHub Status Module: Validation failed.")
+				this.log("Validation failed.")
 				console.warn(result.error)
 			}
 
 		} catch (error) {
-			console.warn("GitHub Status Module: Failed to fetch status from GitHub.")
+			this.log("Failed to fetch status from GitHub.")
+			console.warn(error)
 		}
 	}
 
 	@autobind
 	private checkStatus() {
-		if (this.indicator === "none") return
-
-		this.warn()
+		switch (this.indicator) {
+			case "minor":
+			case "major":
+			case "critical":
+				this.warn()
+				break
+			
+			default:
+				break
+		}
 	}
 
 	@autobind
@@ -62,5 +73,21 @@ export default class extends Module {
 		this.ai.post({
 			text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
 		})
+
+		this.log("Report posted.")
+	}
+
+	@autobind
+	private async mentionHook(msg: Message) {
+		if (msg.text?.includes("GitHub Status")) {
+
+			msg.reply(`indicator: ${this.indicator}\ndescription: ${this.description}`, {
+				immediate: true,
+			})
+			return true
+
+		} else {
+			return false
+		}
 	}
 }
