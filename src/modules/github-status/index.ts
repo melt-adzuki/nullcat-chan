@@ -16,8 +16,8 @@ export default class extends Module {
 		}),
 	})
 
-	private indicator: z.infer<typeof this.schema>["status"]["indicator"]
-	private description: z.infer<typeof this.schema>["status"]["description"]
+	private indicator: z.infer<typeof this.schema>["status"]["indicator"] = "none"
+	private description: z.infer<typeof this.schema>["status"]["description"] = ""
 
 	@autobind
 	public install() {
