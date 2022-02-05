@@ -23,6 +23,7 @@ export default class extends Module {
 	public install() {
 		if (config.serverMonitoring) {
 			setInterval(this.getStatus, 60 * 60 * 1000)
+			this.getStatus()
 		}
 
 		return {
@@ -79,8 +80,7 @@ export default class extends Module {
 
 	@autobind
 	private async mentionHook(msg: Message) {
-		if (msg.text?.includes("GitHub Status")) {
-
+		if (msg.text?.toLowerCase().includes("GitHub")) {
 			msg.reply(`indicator: ${this.indicator}\ndescription: ${this.description}`, {
 				immediate: true,
 			})
