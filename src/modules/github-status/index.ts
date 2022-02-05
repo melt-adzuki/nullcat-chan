@@ -80,7 +80,8 @@ export default class extends Module {
 
 	@autobind
 	private async mentionHook(msg: Message) {
-		if (msg.text?.toLowerCase().includes("GitHub")) {
+		if (msg.text?.toLowerCase().includes("github")) {
+
 			msg.reply(`indicator: ${this.indicator}\ndescription: ${this.description}`, {
 				immediate: true,
 			})
