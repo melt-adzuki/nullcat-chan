@@ -134,6 +134,10 @@ export default {
 
 		itai: name => name ? `${name}大丈夫？なでなで` : '大丈夫？なでなで',
 
+		turai: name => name ? `${name}なでなで ぎゅ～` : 'なでなで ぎゅ～',
+
+		kurusii: name => name ? `${name}なでなで ぎゅ～` : 'なでなで ぎゅ～',
+
 		ote: {
 			normal: '犬じゃないんだが！！',
 

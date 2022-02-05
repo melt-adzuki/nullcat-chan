@@ -30,6 +30,7 @@ export default class extends Module {
 			this.humu(msg) ||
 			this.batou(msg) ||
 			this.itai(msg) ||
+			this.turai(msg) ||
 			this.ote(msg) ||
 			this.ponkotu(msg) ||
 			this.rmrf(msg) ||
@@ -273,12 +274,36 @@ export default class extends Module {
 
 	@autobind
 	private itai(msg: Message): boolean {
-		if (!msg.or(['痛い', 'いたい']) && !msg.extractedText.endsWith('痛い')) return false;
+		if (!msg.or(['痛い', 'いたい'])) return false;
 
 		// メッセージのみ
 		if (!msg.isDm) return true;
 
 		msg.reply(serifs.core.itai(msg.friend.name));
+
+		return true;
+	}
+
+	@autobind
+	private turai(msg: Message): boolean {
+		if (!msg.or(['辛い', 'つらい'])) return false;
+
+		// メッセージのみ
+		if (!msg.isDm) return true;
+
+		msg.reply(serifs.core.turai(msg.friend.name));
+
+		return true;
+	}
+
+	@autobind
+	private kurusii(msg: Message): boolean {
+		if (!msg.or(['苦しい', 'くるしい'])) return false;
+
+		// メッセージのみ
+		if (!msg.isDm) return true;
+
+		msg.reply(serifs.core.kurusii(msg.friend.name));
 
 		return true;
 	}
