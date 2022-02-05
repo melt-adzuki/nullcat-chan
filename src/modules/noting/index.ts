@@ -22,28 +22,14 @@ export default class extends Module {
 
 	@autobind
 	private post() {
-		const notes = [
-			...serifs.noting.notes,
-			() => {
-				const item = genItem();
-				return serifs.noting.want(item);
-			},
-			() => {
-				const item = genItem();
-				return serifs.noting.see(item);
-			},
-			() => {
-				const item = genItem();
-				return serifs.noting.expire(item);
-			},
-		];
+		const notes = serifs.noting.notes;
 
 		const note = notes[Math.floor(Math.random() * notes.length)];
 
 		// TODO: 季節に応じたセリフ
 
 		this.ai.post({
-			text: typeof note === 'function' ? note() : note
+			text: note
 		});
 	}
 }

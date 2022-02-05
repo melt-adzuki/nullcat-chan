@@ -286,7 +286,7 @@ export default {
 		 */
 		congrats: tries => `正解です🎉 (${tries}回目で当てました)`,
 	},
-
+	
 	/**
 	 * 数取りゲーム
 	 */
@@ -392,9 +392,6 @@ export default {
 			'Nullcat chan!です！',
 			'進捗どうですか',
 		],
-		want: item => `${item}欲しい...`,
-		see: item => `トイレに行ったら${item}が落ちてた！`,
-		expire: item => `あ～あ${item}の消費期限切れてた`,
 	},
 };
 
