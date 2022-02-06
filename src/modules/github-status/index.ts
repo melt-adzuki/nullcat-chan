@@ -78,7 +78,7 @@ export default class extends Module {
 	private async mentionHook(msg: Message) {
 		if (msg.text?.toLowerCase().includes("github")) {
 
-			msg.reply(`indicator: ${this.indicator}\ndescription: ${this.description}`, {
+			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`, {
 				immediate: true,
 			})
 			return true
