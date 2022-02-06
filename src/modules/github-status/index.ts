@@ -22,8 +22,11 @@ export default class extends Module {
 	@autobind
 	public install() {
 		if (config.serverMonitoring) {
-			setInterval(this.getStatus, 60 * 60 * 1000)
-			this.getStatus()
+			setInterval(this.updateStatus, 10 * 60 * 1000)
+			setInterval(this.postStatus, 60 * 60 * 1000)
+
+			this.updateStatus()
+			this.postStatus()
 		}
 
 		return {
@@ -32,7 +35,7 @@ export default class extends Module {
 	}
 
 	@autobind
-	private async getStatus() {
+	private async updateStatus() {
 		try {
 			const response = await fetch("https://www.githubstatus.com/api/v2/status.json")
 			const data = await response.json()
@@ -42,8 +45,6 @@ export default class extends Module {
 			if (result.success) {
 				this.indicator = result.data.status.indicator
 				this.description = result.data.status.description
-
-				this.checkStatus()
 			} else {
 				this.log("Validation failed.")
 				console.warn(result.error)
@@ -56,26 +57,21 @@ export default class extends Module {
 	}
 
 	@autobind
-	private checkStatus() {
+	private postStatus() {
 		switch (this.indicator) {
 			case "minor":
 			case "major":
 			case "critical":
-				this.warn()
+				this.ai.post({
+					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
+				})
+
+				this.log("Report posted.")
 				break
 			
 			default:
 				break
 		}
-	}
-
-	@autobind
-	private warn() {
-		this.ai.post({
-			text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
-		})
-
-		this.log("Report posted.")
 	}
 
 	@autobind
