@@ -1,4 +1,7 @@
-# 取扱説明書
+<img src="https://s3.nca10.net/misskey/ffdfadba-f889-4d33-a9ad-b5d9be7226d7.png" align="right" height="320px"/>
+
+# 取扱説明書 
+
 ## 僕の主な機能
 
 ### フォローする
