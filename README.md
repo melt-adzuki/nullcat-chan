@@ -6,7 +6,7 @@ Misskey用のAiベースのBotです。
 - pingに対する返答の内容
 - 自動返信の内容
 - ゴママヨに反応([ここ](https://github.com/ThinaticSystem/honi)から持ってきた)
-- ゲーム機能がない
+- ゲーム機能と絵文字を自動生成するやつがない
 - GitHubのStatusがわかる
 
 ## 導入方法
