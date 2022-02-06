@@ -291,7 +291,11 @@ export default class extends Module {
 		// メッセージのみ
 		if (!msg.isDm) return true;
 
-		msg.reply(serifs.core.turai(msg.friend.name));
+		msg.reply(
+			msg.friend.love >= 5 ? serifs.core.turai.love(msg.friend.name) :
+			msg.friend.love >= -3 ? serifs.core.turai.hate :
+			serifs.core.turai.normal(msg.friend.name)
+		);
 
 		return true;
 	}
@@ -303,7 +307,11 @@ export default class extends Module {
 		// メッセージのみ
 		if (!msg.isDm) return true;
 
-		msg.reply(serifs.core.kurusii(msg.friend.name));
+		msg.reply(
+			msg.friend.love >= 5 ? serifs.core.kurusii.love(msg.friend.name) :
+			msg.friend.love >= -3 ? serifs.core.kurusii.hate :
+			serifs.core.kurusii.normal(msg.friend.name)
+		);
 
 		return true;
 	}

@@ -134,9 +134,21 @@ export default {
 
 		itai: name => name ? `${name}大丈夫？なでなで` : '大丈夫？なでなで',
 
-		turai: name => name ? `${name}なでなで ぎゅ～` : 'なでなで ぎゅ～',
+		turai: {
+			love: name => name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！',
 
-		kurusii: name => name ? `${name}なでなで ぎゅ～` : 'なでなで ぎゅ～',
+			normal: name => name ? `${name}なでなで` : 'なでなで',
+
+			hate: 'ん～。がんばって',
+		},
+
+		kurusii: {
+			love: name => name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！',
+
+			normal: name => name ? `${name}なでなで` : 'なでなで',
+
+			hate: 'ん～。がんばって',
+		},
 
 		ote: {
 			normal: '犬じゃないんだが！！',
