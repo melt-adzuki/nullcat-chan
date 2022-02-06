@@ -39,7 +39,7 @@ export default class extends Module {
 
 	@autobind
 	private async mentionHook(msg: Message) {
-		if (msg.includes(['やる事', 'やること', 'なにしよ', 'なにやろ'])) {
+		if (msg.includes(['やる事', 'やること', 'なにしよ', 'なにやろ', 'にゃにしよ', 'にゃにやろ'])) {
 			const date = new Date();
 			const seed = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}@${msg.userId}`;
 			const rng = seedrandom(seed);
