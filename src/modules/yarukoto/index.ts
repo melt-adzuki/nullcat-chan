@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import Module from '@/module';
 import Message from '@/message';
-import * as seedrandom from 'seedrandom';
 
 const yarukotoList = [
 	'勉強する',
@@ -40,11 +39,7 @@ export default class extends Module {
 	@autobind
 	private async mentionHook(msg: Message) {
 		if (msg.includes(['やる事', 'やること', 'なにしよ', 'なにやろ', 'にゃにしよ', 'にゃにやろ'])) {
-			const date = new Date();
-			const seed = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}@${msg.userId}`;
-			const rng = seedrandom(seed);
-
-			const yarukoto = yarukotoList[Math.floor(rng() * yarukotoList.length)];
+			const yarukoto = yarukotoList[Math.floor(Math.random() * yarukotoList.length)];
 
 			msg.reply(yarukoto);
 			return true;
