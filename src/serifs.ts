@@ -168,13 +168,6 @@ export default {
 	},
 
 	/**
-	 * 絵文字生成
-	 */
-	emoji: {
-		suggest: emoji => `こんなのはどう？→${emoji}`,
-	},
-
-	/**
 	 * 占い
 	 */
 	fortune: {
