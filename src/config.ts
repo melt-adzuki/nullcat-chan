@@ -5,7 +5,6 @@ type Config = {
 	wsUrl: string;
 	apiUrl: string;
 	keywordEnabled: boolean;
-	reversiEnabled: boolean;
 	notingEnabled: boolean;
 	serverMonitoring: boolean;
 	mecab?: string;

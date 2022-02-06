@@ -19,7 +19,6 @@ Misskey用のAiベースのBotです。
 	"master": "管理者のユーザー名(オプション)",
 	"notingEnabled": "ランダムにノートを投稿する機能。true(on) or false(off)",
 	"keywordEnabled": "キーワードを覚える機能 (MeCab が必要) true or false",
-	"reversiEnabled": "僕とリバーシで対局できる機能。true or false",
 	"serverMonitoring": "サーバー監視の機能（重かったりすると教えてくれるよ。）true or false",
 	"mecab": "MeCab のインストールパス (ソースからインストールした場合、大体は /usr/local/bin/mecab) true or false",
 	"mecabDic": "MeCab の辞書ファイルパス (オプション)",
@@ -39,7 +38,6 @@ Misskey用のAiベースのBotです。
 	"master": "管理者のユーザー名(オプション)",
 	"notingEnabled": "ランダムにノートを投稿する機能。true(on) or false(off)",
 	"keywordEnabled": "キーワードを覚える機能 (MeCab が必要) true or false",
-	"reversiEnabled": "僕とリバーシで対局できる機能。true or false",
 	"mecab": "/usr/bin/mecab",
 	"mecabDic": "/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/",
 	"memoryDir": "data"
