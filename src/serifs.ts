@@ -225,6 +225,13 @@ export default {
 	},
 
 	/**
+	 * ろぐぼ
+	 */
+	 rogubo: {
+		post: 'ログボ！！',
+	},
+
+	/**
 	 * バレンタイン
 	 */
 	valentine: {

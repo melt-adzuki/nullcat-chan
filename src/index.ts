@@ -28,6 +28,7 @@ import ReminderModule from './modules/reminder';
 import GomamayoModule from './modules/gomamayo';
 import GitHubStatusModule from './modules/github-status'
 import YarukotoModule from './modules/yarukoto'
+import RoguboModule from './modules/rogubo'
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -76,6 +77,7 @@ promiseRetry(retry => {
 		new GomamayoModule(),
 		new GitHubStatusModule(),
 		new YarukotoModule(),
+		new RoguboModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));
