@@ -1,5 +1,5 @@
 ## これってなに？
-Misskey用のAiベースのBotです。
+Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 
 ## 大きな変更点
 - 自動投稿の内容
