@@ -28,7 +28,7 @@ export default class extends Module {
 			indices: ['userId']
 		});
 
-		setInterval(this.learn, 1000 * 60 * 60);
+		setInterval(this.learn, 1000 * 60 * 45);
 
 		return {};
 	}
