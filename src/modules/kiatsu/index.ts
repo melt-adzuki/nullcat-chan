@@ -22,10 +22,10 @@ export default class extends Module {
 		place_id: z.literal("102"),
 		prefectures_id: z.literal("13"),
 		dateTime: z.string(),
-		yesterday: z.array(this.itemSchema),
+		yesterday: z.array(this.itemSchema).optional(),
 		today: z.array(this.itemSchema),
-		tomorrow: z.array(this.itemSchema),
-		dayaftertomorrow: z.array(this.itemSchema),
+		tomorrow: z.array(this.itemSchema).optional(),
+		dayaftertomorrow: z.array(this.itemSchema).optional(),
 	})
 
 	private currentPressureLevel: z.infer<typeof this.itemSchema>["pressure_level"] = "0"
