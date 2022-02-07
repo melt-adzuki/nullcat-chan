@@ -20,6 +20,8 @@ export default class extends Module {
 	@autobind
 	private async post() {
 		const date = new Date()
+		date.setMinutes(date.getMinutes() + 1)
+		
 		const hour = date.getHours()
 
 		switch (hour) {
