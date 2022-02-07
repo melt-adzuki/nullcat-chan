@@ -9,6 +9,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - ゲーム機能と絵文字を自動生成するやつがない
 - GitHubのStatusがわかる
 - やることを決めてくれる
+- 気圧の状況を教えてくれる
 
 ## 導入方法
 > Node.js と npm と MeCab がインストールされている必要があります。
