@@ -11,7 +11,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - やることを決めてくれる
 
 ## 導入方法
-> Node.js と npm と MeCab (オプション) がインストールされている必要があります。
+> Node.js と npm と MeCab がインストールされている必要があります。
 
 まず適当なディレクトリに `git clone` します。
 次にそのディレクトリに `config.json` を作成します。中身は次のようにします:
