@@ -1,32 +1,28 @@
 import autobind from "autobind-decorator"
 
-import { Note } from "@/misskey/note"
 import Module from "@/module"
-import Stream from "@/stream"
+import Message from "@/message"
 
 export default class extends Module {
 	public readonly name = "what"
 
-	private htl: ReturnType<Stream["useSharedConnection"]>
-
 	@autobind
 	public install() {
-		this.htl = this.ai.connection.useSharedConnection("homeTimeline")
-		this.htl.on("note", this.onNote)
-
-		return {}
+		return {
+			mentionHook: this.mentionHook
+		}
 	}
 
 	@autobind
-	private async onNote(note: Note) {
-		if (note.reply != null) return
-		if (note.text == null) return
-		if (note.text.includes("@")) return
+	private async mentionHook(message: Message) {
+		if (!message.includes(["って何", "ってなに", "ってにゃに"])) return false
 
-		if (note.text.includes("って何") || note.text.includes("ってなに") || note.text.includes("ってにゃに")) {
-			const match = note.text.match(/(.+?)って(何|なに|にゃに)(.+?)/)
+		const match = message.extractedText.match(/(.+?)って(何|なに|にゃに)/)
 
-			if (match) note.reply(`自分で調べろ\n${match[1]} 検索`)
+		if (match) {
+			message.reply(`調べたよ\n${match[1]} 検索`)
 		}
+
+		return true
 	}
 }
