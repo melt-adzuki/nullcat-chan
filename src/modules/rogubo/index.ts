@@ -25,7 +25,7 @@ export default class extends Module {
 			return
 		}
 
-		data.lastPostDate === localDateString
+		data.lastPostDate = localDateString
 		this.setData(data)
 
 		this.ai.post({
