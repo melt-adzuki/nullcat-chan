@@ -19,7 +19,6 @@ import EmojiReactModule from './modules/emoji-react';
 import FortuneModule from './modules/fortune';
 import KeywordModule from './modules/keyword';
 import TimerModule from './modules/timer';
-import ServerModule from './modules/server';
 import FollowModule from './modules/follow';
 import ValentineModule from './modules/valentine';
 import SleepReportModule from './modules/sleep-report';
@@ -29,8 +28,7 @@ import GomamayoModule from './modules/gomamayo';
 import GitHubStatusModule from './modules/github-status'
 import YarukotoModule from './modules/yarukoto'
 import RoguboModule from './modules/rogubo'
-import TimeModule from './modules/time'
-import KiatuModule from './modules/kiatu'
+import KiatsuModule from './modules/kiatsu'
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -68,7 +66,6 @@ promiseRetry(retry => {
 		new TimerModule(),
 		new TalkModule(),
 		new PingModule(),
-		new ServerModule(),
 		new FollowModule(),
 		new BirthdayModule(),
 		new ValentineModule(),
@@ -80,8 +77,7 @@ promiseRetry(retry => {
 		new GitHubStatusModule(),
 		new YarukotoModule(),
 		new RoguboModule(),
-		new TimeModule(),
-		new KiatuModule(),
+		new KiatsuModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));

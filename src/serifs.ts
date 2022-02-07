@@ -236,10 +236,6 @@ export default {
 		chocolateForYou: name => name ? `${name}！チョコあげる！` : 'チョコあげる！',
 	},
 
-	server: {
-		cpu: 'CPUあっちあち！！'
-	},
-
 	sleepReport: {
 		report: hours => `んみゃぁ、${hours}時間くらいねちゃってたかも`,
 		reportUtatane: 'んみゃ... ',
