@@ -45,11 +45,10 @@ export default class extends Module {
 			setInterval(this.post, 60 * 60 * 1000)
 
 			this.update()
-			this.post()
 		}
 
 		return {
-			mentionHook: this.mentionHook
+			mentionHook: this.mentionHook,
 		}
 	}
 
