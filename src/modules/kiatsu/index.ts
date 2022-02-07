@@ -33,9 +33,9 @@ export default class extends Module {
 	private readonly stringPressureLevel: { [K in typeof this.currentPressureLevel]: string } = {
 		0: "問題ないかも。無理しないでね。",
 		1: "問題ないかも。無理しないでね。",
-		2: "ちょっとやばいかも。無理しないでね。",
-		3: "やばいかも。無理しないでね。",
-		4: "かなりやばいかも。無理しないでね。",
+		2: "気圧ちょっとやばいかも。無理しないでね。",
+		3: "気圧やばいかも。無理しないでね。",
+		4: "気圧かなりやばいかも。無理しないでね。",
 	} as const
 
 	@autobind
@@ -84,7 +84,7 @@ export default class extends Module {
 		if (this.currentPressureLevel === "0" || this.currentPressureLevel === "1") return
 
 		this.ai.post({
-			text: this.stringPressureLevel[this.currentPressureLevel]
+			text: this.stringPressureLevel[this.currentPressureLevel],
 		})
 	}
 
