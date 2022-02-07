@@ -5,7 +5,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - 自動投稿の内容
 - pingに対する返答の内容
 - 自動返信の内容
-- ゴママヨに反応([ここ](https://github.com/ThinaticSystem/honi)から持ってきた)
+- ゴママヨに反応([ここ](https://github.com/ThinaticSystem/gomamayo.js)から持ってきた)
 - ゲーム機能と絵文字を自動生成するやつがない
 - GitHubのStatusがわかる
 - やることを決めてくれる
