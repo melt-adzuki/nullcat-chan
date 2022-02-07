@@ -4,7 +4,6 @@ import { z } from "zod"
 
 import Module from "@/module"
 import Message from "@/message"
-import config from "@/config"
 
 export default class extends Module {
 	public readonly name = "kiatsu"
@@ -40,12 +39,10 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		if (config.serverMonitoring) {
-			setInterval(this.update, 10 * 60 * 1000)
-			setInterval(this.post, 60 * 60 * 1000)
+		setInterval(this.update, 10 * 60 * 1000)
+		setInterval(this.post, 60 * 60 * 1000)
 
-			this.update()
-		}
+		this.update()
 
 		return {
 			mentionHook: this.mentionHook,
@@ -88,16 +85,13 @@ export default class extends Module {
 	}
 
 	@autobind
-	private async mentionHook(msg: Message) {
-		if (msg.includes(["気圧", "きあつ"])) {
+	private async mentionHook(message: Message) {
+		if (!message.includes(["気圧", "きあつ"])) return false
 
-			msg.reply(this.stringPressureLevel[this.currentPressureLevel], {
-				immediate: true,
-			})
-			return true
-
-		} else {
-			return false
-		}
+		message.reply(this.stringPressureLevel[this.currentPressureLevel], {
+			immediate: true,
+		})
+		
+		return true
 	}
 }
