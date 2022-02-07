@@ -29,6 +29,7 @@ import GitHubStatusModule from './modules/github-status'
 import YarukotoModule from './modules/yarukoto'
 import RoguboModule from './modules/rogubo'
 import KiatsuModule from './modules/kiatsu'
+import JihouModule from "./modules/jihou"
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -78,6 +79,7 @@ promiseRetry(retry => {
 		new YarukotoModule(),
 		new RoguboModule(),
 		new KiatsuModule(),
+		new JihouModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));
