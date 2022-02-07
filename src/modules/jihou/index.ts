@@ -9,7 +9,7 @@ export default class extends Module {
 	@autobind
 	public install() {
 		accurateInterval(
-			() => this.post(),
+			this.post,
 			1000 * 60 * 60,
 			{ aligned: true, immediate: true }
 		)
@@ -20,10 +20,20 @@ export default class extends Module {
 	@autobind
 	private async post() {
 		const date = new Date()
-		const hour = date.getHours
+		const hour = date.getHours()
 
-		this.ai.post({
-			text: `${hour}時だよ！`,
-		})
+		switch (hour) {
+			case 7:
+				this.ai.post({
+					text: `おはよ！朝だよ起きて！`,
+				})
+				break
+
+			default:
+				this.ai.post({
+					text: `${hour}時だよ！`,
+				})
+				break
+		}
 	}
 }
