@@ -10,6 +10,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - GitHubのStatusがわかる
 - やることを決めてくれる
 - 気圧の状況を教えてくれる
+- 時報機能
 
 ## 導入方法
 > Node.js と npm と MeCab がインストールされている必要があります。
