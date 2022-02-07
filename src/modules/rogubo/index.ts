@@ -1,14 +1,13 @@
 import autobind from "autobind-decorator"
 import Module from "@/module"
 import serifs from "@/serifs"
-import Message from "@/message"
 
 export default class extends Module {
 	public readonly name = "rogubo"
 
 	@autobind
 	public install() {
-		setInterval(this.post, 1000 * 60 * 45)
+		setInterval(this.post, 1000 * 60 * 60 * 12)
 		this.post()
 
 		return {}
