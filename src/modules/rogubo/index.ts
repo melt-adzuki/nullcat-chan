@@ -1,47 +1,36 @@
-import autobind from 'autobind-decorator';
-import Module from '@/module';
-import serifs from '@/serifs';
-import Message from '@/message';
+import autobind from "autobind-decorator"
+import Module from "@/module"
+import serifs from "@/serifs"
+import Message from "@/message"
 
 export default class extends Module {
-	public readonly name = 'rogubo';
+	public readonly name = "rogubo"
 
 	@autobind
 	public install() {
-		this.post();
-		setInterval(this.post, 1000 * 60 * 1);
-		return {
-			mentionHook: this.mentionHook
-		};
+		setInterval(this.post, 1000 * 60 * 45)
+		this.post()
+
+		return {}
 	}
+
 	@autobind
 	private async post() {
-		const now = new Date();
-		if (now.getHours() !== 6){if (now.getMinutes() !==1)return;}
-		const date = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-		const data = this.getData();
-		if (data.lastPosted == date) return;
-		data.lastPosted = date;
-		this.setData(data);
+		const data = this.getData()
 
-		this.log('Time to rogubo');
+		const date = new Date()
+		const localDateString = date.toLocaleDateString()
 
-		this.log('Posting...');
-		this.ai.post({
-			text: serifs.rogubo.post,
-		});
-	}
-	@autobind
-	private async mentionHook(msg: Message) {
-		if (msg.text && msg.text.includes('ping')) {
-			msg.reply('ログボ！！', {
-				immediate: true
-			});
-			return true;
-		} else {
-			return false;
+		if (data.lastPostDate === localDateString) {
+			this.log("Already posted today.")
+			return
 		}
+
+		data.lastPostDate === localDateString
+		this.setData(data)
+
+		this.ai.post({
+			text: serifs.rogubo,
+		})
 	}
 }
-
-
