@@ -2,22 +2,30 @@ import autobind from "autobind-decorator"
 import Module from "@/module"
 import serifs from "@/serifs"
 
+const accurateInterval = require("accurate-interval")
+
 export default class extends Module {
 	public readonly name = "rogubo"
 
 	@autobind
 	public install() {
-		setInterval(this.post, 1000 * 60 * 60 * 12)
-		this.post()
+		accurateInterval(
+			this.post,
+			1000 * 60 * 60,
+			{ aligned: true, immediate: true }
+		)
 
 		return {}
 	}
 
 	@autobind
 	private async post() {
-		const data = this.getData()
-
 		const date = new Date()
+		date.setMinutes(date.getMinutes() + 1)
+
+		if (!(date.getHours() === 6)) return
+
+		const data = this.getData()
 		const localDateString = date.toLocaleDateString()
 
 		if (data.lastPostDate === localDateString) {
