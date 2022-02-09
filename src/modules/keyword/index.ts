@@ -4,6 +4,7 @@ import Module from '@/module';
 import config from '@/config';
 import serifs from '@/serifs';
 import { mecab } from './mecab';
+import Message from '@/message';
 
 function kanaToHira(str: string) {
 	return str.replace(/[\u30a1-\u30f6]/g, match => {
@@ -30,7 +31,9 @@ export default class extends Module {
 
 		setInterval(this.learn, 1000 * 60 * 45);
 
-		return {};
+		return {
+			mentionHook: this.mentionHook
+		};
 	}
 
 	@autobind
@@ -77,5 +80,19 @@ export default class extends Module {
 		this.ai.post({
 			text: text
 		});
+	}
+
+	@autobind
+	private async mentionHook(msg: Message) {
+		if (msg.includes(['覚えて', 'おぼえて'])) {
+			this.log('Keyword learn requested');
+			msg.reply('がんばってみるね');
+			this.learn();
+			return {
+				reaction: 'like'
+			};
+		} else {
+			return false;
+		}
 	}
 }
