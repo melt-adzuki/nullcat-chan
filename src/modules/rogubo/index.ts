@@ -36,8 +36,10 @@ export default class extends Module {
 		data.lastPostDate = localDateString
 		this.setData(data)
 
-		this.ai.post({
-			text: serifs.rogubo,
-		})
+		setTimeout(() => {
+			this.ai.post({
+				text: serifs.rogubo,
+			})
+		}, 1000 * 60 * 60 * Math.random())
 	}
 }
