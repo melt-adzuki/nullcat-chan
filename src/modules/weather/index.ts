@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import Module from '@/module';
 import Message from '@/message';
 import config from '@/config';
-import json from 'json';
 import fetch from 'node-fetch';
 
 export default class extends Module {
@@ -19,7 +18,8 @@ export default class extends Module {
 	private async mentionHook(msg: Message) {
 		if (msg.text && msg.text.includes('天気') && msg.text.includes('天気')) {
 
-			let weatherlocation = '130000';
+			let weatherlocation: any;
+			weatherlocation = '130000';
 			if (config.memoryDir) {
 				weatherlocation = config.weatherlocation;
 			}
