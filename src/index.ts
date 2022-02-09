@@ -31,6 +31,7 @@ import RoguboModule from './modules/rogubo'
 import KiatsuModule from './modules/kiatsu'
 import JihouModule from './modules/jihou'
 import WhatModule from './modules/what'
+import FeelingModule from './modules/feeling';
 import WeatherModule from './modules/weather';
 
 console.log('   __    ____  _____  ___ ');
@@ -83,7 +84,8 @@ promiseRetry(retry => {
 		new KiatsuModule(),
 		new JihouModule(),
 		new WhatModule(),
-		new WeatherModule(),
+		new FeelingModule(),
+    new WeatherModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));
