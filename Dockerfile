@@ -2,10 +2,11 @@ FROM node:lts-bullseye
 
 RUN apt-get update && apt-get install -y tini
 
+ARG DEBIAN_FRONTEND=noninteractive
 ARG enable_mecab=1
 
 RUN if [ $enable_mecab -ne 0 ]; then apt-get update \
-  && apt-get install mecab libmecab-dev mecab-ipadic-utf8 make curl xz-utils file sudo --no-install-recommends -y \
+  && apt-get install mecab libmecab-dev mecab-ipadic-utf8 make curl xz-utils file sudo tzdata --no-install-recommends -y \
   && apt-get clean \
   && rm -rf /var/lib/apt-get/lists/* \
   && cd /opt \
