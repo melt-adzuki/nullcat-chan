@@ -32,6 +32,7 @@ import KiatsuModule from './modules/kiatsu'
 import JihouModule from './modules/jihou'
 import WhatModule from './modules/what'
 import FeelingModule from './modules/feeling';
+import TraceMoe from './modules/trace-moe';
 import WeatherModule from './modules/weather';
 import ServerModule from './modules/server';
 
@@ -86,6 +87,7 @@ promiseRetry(retry => {
 		new JihouModule(),
 		new WhatModule(),
 		new FeelingModule(),
+		new TraceMoe(),
     	new WeatherModule(),
 		new ServerModule(),
 	]);
