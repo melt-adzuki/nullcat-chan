@@ -20,7 +20,7 @@ export default class extends Module {
 			const gomamayoResult = await gomamayo.find(notetext.replace(/ゴママヨ/g, ''));
 			let resBodyText, resCwText;
 			if (gomamayoResult) {
-				resCwText = 'ゴママヨかも';
+				resCwText = 'ゴママヨかもしれない';
 				resBodyText = JSON.stringify(gomamayoResult, undefined, 2);
 			} else {
 				resBodyText = 'ゴママヨじゃないかも';

@@ -20,7 +20,7 @@ export default class extends Module {
 		const match = message.extractedText.match(/(.+?)って(何|なに|にゃに)/)
 
 		if (match) {
-			message.reply(`調べたよ\n${match[1]} 検索`)
+			message.reply(`Google先生に聞いてみた！！！\n${match[1]} 検索`)
 		}
 
 		return true

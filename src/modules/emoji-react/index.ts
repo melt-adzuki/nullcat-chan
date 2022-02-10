@@ -40,8 +40,10 @@ export default class extends Module {
 
 		if (await gomamayo.find(note.text)) return react(':b_bikkuribikkuri:');
 		if (includes(note.text, ['ぬるきゃっとちゃん','Nullcat chan'])) return react(':bibibi_nullcat:');
-		if (includes(note.text, ['つらい','つらすぎ','死にたい','つかれた','疲れた','しにたい','きえたい','消えたい','やだ','いやだ','なきそう','泣きそう','辛い','ねむい','ねむたい','ねたい'])) return react(':nadenade_neko:');
-		if (includes(note.text, ['完全に理解した', '理解した', 'りかいした', 'わかった', '頑張った', 'がんばった'])) return react(':erait:');
+		if (includes(note.text, ['ふむ','むふ','つらい','つらすぎ','死にたい','つかれた','疲れた','しにたい','きえたい','消えたい','やだ','いやだ','なきそう','泣きそう','辛い'])) return react(':nadenade_neko:');
+		if (includes(note.text, ['理解した', 'りかいした', 'わかった', '頑張った', 'がんばった'])) return react(':erai:');
+		if (includes(note.text, ['ねむい','ねむたい','ねたい'])) return react(':smoca:');
+		if (includes(note.text, ['ねれない','ねれん','ねれぬ'])) return react(':sairesu:');
 		
 	}
 }

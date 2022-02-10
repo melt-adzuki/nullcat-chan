@@ -27,7 +27,7 @@ export default class extends Module {
 		switch (hour) {
 			case 7:
 				this.ai.post({
-					text: `おはよ！朝だよ起きて！`,
+					text: `起きた！みんなおはよ！`,
 				})
 				break
 
