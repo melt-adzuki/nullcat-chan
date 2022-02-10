@@ -27,7 +27,9 @@ export default class extends Module {
 
     @autobind
     public install() {
-        return {};
+        return {
+            mentionHook: this.mentionHook
+        }
     }
 
     @autobind
