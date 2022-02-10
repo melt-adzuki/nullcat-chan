@@ -33,8 +33,8 @@ export default class extends Module {
     }
 
     @autobind
-    private async  mentionHook(msg: Message) {
-        if (["アニメ", "教えて"].includes(msg.text)) {
+    private async mentionHook(msg: Message) {
+        if (msg.includes(["アニメ"])) {
             return false;
         }
         const filteredImageFiles = msg.files.filter((file) => {
