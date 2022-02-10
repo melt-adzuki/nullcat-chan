@@ -32,6 +32,9 @@ export default class extends Module {
 
     @autobind
     private async  mentionHook(msg: Message) {
+        if (["アニメ", "教えて"].includes(msg.text)) {
+            return false;
+        }
         const filteredImageFiles = msg.files.filter((file) => {
             return file.type.startsWith("image");
         });
@@ -63,11 +66,25 @@ export default class extends Module {
             console.warn(error);
             return false;            
         }
-        
 
+        const graphql = JSON.stringify({
+            query: "query ($id: Int) { \n  Media (id: $id, type: ANIME) { \n    id\n    title {\n      native\n        }\n    }\n}",
+            variables: {"id":anilistId}
+        })
+        const requestOptions = {
+            method: 'POST',
+            body: graphql,
+            redirect: 'follow'
+        };
 
-
-
+        const response = await fetch("https://graphql.anilist.co/", requestOptions);
+        const result = await response.json();
+        const native = result.data.Media.id.title.native;
+        if (!native) {
+            return false;
+        }
+        msg.reply(`僕の名前はぬるきゃだよ。ちなみに今の画像のアニメは${native}だよ。`);
+        return true;
         
     }
 
