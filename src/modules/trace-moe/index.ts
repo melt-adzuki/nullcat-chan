@@ -85,8 +85,5 @@ export default class extends Module {
         }
         msg.reply(`僕の名前はぬるきゃだよ。ちなみに今の画像のアニメは${native}だよ。`);
         return true;
-        
     }
-
-
 }
