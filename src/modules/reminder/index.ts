@@ -39,7 +39,7 @@ export default class extends Module {
 		let text = msg.extractedText.toLowerCase();
 		if (!text.startsWith('リマインド') && !text.startsWith('todo') && !text.startsWith('これやる')) return false;
 
-		if (text.startsWith('やることリスト') || text.startsWith('todos')) {
+		if (text.startsWith('リスト') || text.startsWith('todos')) {
 			const reminds = this.reminds.find({
 				userId: msg.userId,
 			});
