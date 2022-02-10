@@ -33,6 +33,8 @@ import JihouModule from './modules/jihou'
 import WhatModule from './modules/what'
 import FeelingModule from './modules/feeling';
 import TraceMoe from './modules/trace-moe';
+import WeatherModule from './modules/weather';
+import ServerModule from './modules/server';
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -86,6 +88,8 @@ promiseRetry(retry => {
 		new WhatModule(),
 		new FeelingModule(),
 		new TraceMoe(),
+    	new WeatherModule(),
+		new ServerModule(),
 	]);
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));

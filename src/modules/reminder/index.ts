@@ -6,7 +6,7 @@ import serifs, { getSerif } from '@/serifs';
 import { acct } from '@/utils/acct';
 import config from '@/config';
 
-const NOTIFY_INTERVAL = 1000 * 60 * 60 * 12;
+const NOTIFY_INTERVAL = 1000 * 60 * 60 * 1;
 
 export default class extends Module {
 	public readonly name = 'reminder';
@@ -143,10 +143,15 @@ export default class extends Module {
 				text: serifs.reminder.notifyWithThing(remind.thing, friend.name)
 			});
 		} else {
-			reply = await this.ai.post({
-				renoteId: remind.thing == null && remind.quoteId ? remind.quoteId : remind.id,
-				text: acct(friend.doc.user) + ' ' + serifs.reminder.notify(friend.name)
-			});
+			try {
+				reply = await this.ai.post({
+					renoteId: remind.thing == null && remind.quoteId ? remind.quoteId : remind.id,
+					text: acct(friend.doc.user) + ' ' + serifs.reminder.notify(friend.name)
+				});
+			} catch (err) {
+				// TODO: renote対象が消されていたらリマインダー解除
+				return;
+			}
 		}
 
 		this.subscribeReply(remind.id, remind.isDm, remind.isDm ? remind.userId : reply.id, {
