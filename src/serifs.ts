@@ -224,6 +224,10 @@ export default {
 		cancel: `OK！`,
 	},
 
+	server: {
+		cpu: 'サーバーざぁこ♡♡♡'
+	},
+
 	/**
 	 * ろぐぼ
 	 */
@@ -270,3 +274,4 @@ export function getSerif(variant: string | string[]): string {
 		return variant;
 	}
 }
+
