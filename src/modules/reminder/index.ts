@@ -148,7 +148,7 @@ export default class extends Module {
 					renoteId: remind.thing == null && remind.quoteId ? remind.quoteId : remind.id,
 					text: acct(friend.doc.user) + ' ' + serifs.reminder.notify(friend.name),
 					visibility: "specified",
-					visibleUserIds: remind.userId
+					visibleUserIds: [remind.userId]
 				});
 			} catch (err) {
 				// TODO: renote対象が消されていたらリマインダー解除
