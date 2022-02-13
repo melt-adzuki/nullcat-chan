@@ -1,4 +1,4 @@
-// AI CORE
+// NULLCAT-CHAN CORE
 
 import * as fs from 'fs';
 import autobind from 'autobind-decorator';
@@ -37,9 +37,9 @@ export type Meta = {
 };
 
 /**
- * 藍
+ * ぬるきゃっとちゃん
  */
-export default class 藍 {
+export default class NullcatChan {
 	public readonly version = pkg._v;
 	public account: User;
 	public connection: Stream;
@@ -73,8 +73,8 @@ export default class 藍 {
 	public moduleData: loki.Collection<any>;
 
 	/**
-	 * 藍インスタンスを生成します
-	 * @param account 藍として使うアカウント
+	 * ぬるきゃっとちゃんのインスタンスを生成します
+	 * @param account ぬるきゃっとちゃんを遣うアカウント
 	 * @param modules モジュール。先頭のモジュールほど高優先度
 	 */
 	constructor(account: User, modules: Module[]) {
@@ -106,7 +106,7 @@ export default class 藍 {
 
 	@autobind
 	public log(msg: string) {
-		log(chalk`[{magenta AiOS}]: ${msg}`);
+		log(chalk`[{magenta Core}]: ${msg}`);
 	}
 
 	@autobind
@@ -201,7 +201,7 @@ export default class 藍 {
 
 		setInterval(this.logWaking, 10000);
 
-		this.log(chalk.green.bold('Ai am now running!'));
+		this.log(chalk.green.bold('Nullcat chan is now running!'));
 	}
 
 	/**

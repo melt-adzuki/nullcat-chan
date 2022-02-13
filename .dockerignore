@@ -1,6 +1,6 @@
 config.json
 font.ttf
-ai.*
+nullcat-chan.*
 *.md
 *.png
 Dockerfile

@@ -79,7 +79,7 @@ export default class extends Module {
 	private post() {
 		if (this.currentPressureLevel === "0" || this.currentPressureLevel === "1") return
 
-		this.ai.post({
+		this.nullcatChan.post({
 			text: this.stringPressureLevel[this.currentPressureLevel],
 		})
 	}

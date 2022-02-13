@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import * as chalk from 'chalk';
 const delay = require('timeout-as-promise');
 
-import 藍 from '@/ai';
+import NullcatChan from '@/nullcat-chan';
 import Friend from '@/friend';
 import { User } from '@/misskey/user';
 import includes from '@/utils/includes';
@@ -32,7 +32,7 @@ interface MisskeyFile {
 }
 
 export default class Message {
-	private ai: 藍;
+	private nullcatChan: NullcatChan;
 	private messageOrNote: any;
 	public isDm: boolean;
 
@@ -69,8 +69,8 @@ export default class Message {
 	public get extractedText(): string {
 		const host = new URL(config.host).host.replace(/\./g, '\\.');
 		return this.text
-			.replace(new RegExp(`^@${this.ai.account.username}@${host}\\s`, 'i'), '')
-			.replace(new RegExp(`^@${this.ai.account.username}\\s`, 'i'), '')
+			.replace(new RegExp(`^@${this.nullcatChan.account.username}@${host}\\s`, 'i'), '')
+			.replace(new RegExp(`^@${this.nullcatChan.account.username}\\s`, 'i'), '')
 			.trim();
 	}
 
@@ -80,15 +80,15 @@ export default class Message {
 
 	public friend: Friend;
 
-	constructor(ai: 藍, messageOrNote: any, isDm: boolean) {
-		this.ai = ai;
+	constructor(nullcatChan: NullcatChan, messageOrNote: any, isDm: boolean) {
+		this.nullcatChan = nullcatChan;
 		this.messageOrNote = messageOrNote;
 		this.isDm = isDm;
 
-		this.friend = new Friend(ai, { user: this.user });
+		this.friend = new Friend(nullcatChan, { user: this.user });
 
 		// メッセージなどに付いているユーザー情報は省略されている場合があるので完全なユーザー情報を持ってくる
-		this.ai.api('users/show', {
+		this.nullcatChan.api('users/show', {
 			userId: this.userId
 		}).then(user => {
 			this.friend.updateUser(user);
@@ -104,19 +104,19 @@ export default class Message {
 	}) {
 		if (text == null) return;
 
-		this.ai.log(`>>> Sending reply to ${chalk.underline(this.id)}`);
+		this.nullcatChan.log(`>>> Sending reply to ${chalk.underline(this.id)}`);
 
 		if (!opts?.immediate) {
 			await delay(2000);
 		}
 
 		if (this.isDm) {
-			return await this.ai.sendMessage(this.messageOrNote.userId, {
+			return await this.nullcatChan.sendMessage(this.messageOrNote.userId, {
 				text: text,
 				fileId: opts?.file?.id
 			});
 		} else {
-			return await this.ai.post({
+			return await this.nullcatChan.post({
 				replyId: this.messageOrNote.id,
 				text: text,
 				fileIds: opts?.file ? [opts?.file.id] : undefined,

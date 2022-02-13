@@ -16,7 +16,7 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		this.htl = this.ai.connection.useSharedConnection('homeTimeline');
+		this.htl = this.nullcatChan.connection.useSharedConnection('homeTimeline');
 		this.htl.on('note', this.onNote);
 
 		return {};
@@ -32,7 +32,7 @@ export default class extends Module {
 			if (!immediate) {
 				await delay(1500);
 			}
-			this.ai.api('notes/reactions/create', {
+			this.nullcatChan.api('notes/reactions/create', {
 				noteId: note.id,
 				reaction: reaction
 			});

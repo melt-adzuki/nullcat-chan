@@ -16,7 +16,7 @@ export default class extends Module {
 	private async mentionHook(msg: Message) {
 		if (msg.text && msg.includes(['フォロー', 'フォロバ', 'follow me'])) {
 			if (!msg.user.isFollowing) {
-				this.ai.api('following/create', {
+				this.nullcatChan.api('following/create', {
 					userId: msg.userId,
 				});
 				msg.reply('これからよろしくね！', {immediate: true});

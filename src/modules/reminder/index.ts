@@ -23,7 +23,7 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		this.reminds = this.ai.getCollection('reminds', {
+		this.reminds = this.nullcatChan.getCollection('reminds', {
 			indices: ['userId', 'id']
 		});
 
@@ -134,17 +134,17 @@ export default class extends Module {
 		remind.times++;
 		this.reminds.update(remind);
 
-		const friend = this.ai.lookupFriend(remind.userId);
+		const friend = this.nullcatChan.lookupFriend(remind.userId);
 		if (friend == null) return; // 処理の流れ上、実際にnullになることは無さそうだけど一応
 
 		let reply;
 		if (remind.isDm) {
-			this.ai.sendMessage(friend.userId, {
+			this.nullcatChan.sendMessage(friend.userId, {
 				text: serifs.reminder.notifyWithThing(remind.thing, friend.name)
 			});
 		} else {
 			try {
-				reply = await this.ai.post({
+				reply = await this.nullcatChan.post({
 					renoteId: remind.thing == null && remind.quoteId ? remind.quoteId : remind.id,
 					text: acct(friend.doc.user) + ' ' + serifs.reminder.notify(friend.name),
 					visibility: "specified",

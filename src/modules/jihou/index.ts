@@ -26,13 +26,13 @@ export default class extends Module {
 
 		switch (hour) {
 			case 7:
-				this.ai.post({
+				this.nullcatChan.post({
 					text: `起きた！みんなおはよ！`,
 				})
 				break
 
 			default:
-				this.ai.post({
+				this.nullcatChan.post({
 					text: `${hour}時だよ！`,
 				})
 				break

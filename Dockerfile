@@ -17,9 +17,9 @@ RUN if [ $enable_mecab -ne 0 ]; then apt-get update \
   && echo "dicdir = /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/" > /etc/mecabrc \
   && apt-get purge git make curl xz-utils file -y; fi
 
-COPY . /ai
+COPY . /nullcat-chan
 
-WORKDIR /ai
+WORKDIR /nullcat-chan
 RUN npm install && npm run build
 
 ENTRYPOINT ["/usr/bin/tini", "--"]

@@ -1,5 +1,5 @@
 import autobind from 'autobind-decorator';
-import { HandlerResult } from '@/ai';
+import { HandlerResult } from '@/nullcat-chan';
 import Module from '@/module';
 import Message from '@/message';
 import serifs, { getSerif } from '@/serifs';
@@ -219,7 +219,7 @@ export default class extends Module {
 		// これは、「ハグ」と言って「ぎゅー」と返信したとき、相手が
 		// それに対してさらに「ぎゅー」と返信するケースがあったため。
 		// そうするとその「ぎゅー」に対してもマッチするため、また
-		// 藍がそれに返信してしまうことになり、少し不自然になる。
+		// ぬるきゃっとちゃんがそれに返信してしまうことになり、少し不自然になる。
 		// これを防ぐために前にハグしてから少し時間が経っていないと
 		// 返信しないようにする
 		const now = Date.now();

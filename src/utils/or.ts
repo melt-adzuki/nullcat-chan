@@ -9,7 +9,7 @@ export default function(text: string, words: (string | RegExp)[]): boolean {
 	return words.some(word => {
 		/**
 		 * テキストの余分な部分を取り除く
-		 * 例えば「藍ちゃん好き！」のようなテキストを「好き」にする
+		 * 例えば「ぬるきゃっとちゃん好き！」のようなテキストを「好き」にする
 		 */
 		function denoise(text: string): string {
 			text = text.trim();
@@ -34,7 +34,7 @@ export default function(text: string, words: (string | RegExp)[]): boolean {
 				text = text.replace(/です$/, '');
 				text = text.replace(/(\.|…)+$/, '');
 				text = text.replace(/[♪♥]+$/, '');
-				text = text.replace(/^藍/, '');
+				text = text.replace(/^ぬるきゃっと/, '');
 				text = text.replace(/^ちゃん/, '');
 				text = text.replace(/、+$/, '');
 			}

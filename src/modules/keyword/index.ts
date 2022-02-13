@@ -25,7 +25,7 @@ export default class extends Module {
 	public install() {
 		if (!config.keywordEnabled) return {};
 
-		this.learnedKeywords = this.ai.getCollection('_keyword_learnedKeywords', {
+		this.learnedKeywords = this.nullcatChan.getCollection('_keyword_learnedKeywords', {
 			indices: ['userId']
 		});
 
@@ -38,12 +38,12 @@ export default class extends Module {
 
 	@autobind
 	private async learn() {
-		const tl = await this.ai.api('notes/local-timeline', {
+		const tl = await this.nullcatChan.api('notes/local-timeline', {
 			limit: 30
 		});
 
 		const interestedNotes = tl.filter(note =>
-			note.userId !== this.ai.account.id &&
+			note.userId !== this.nullcatChan.account.id &&
 			note.text != null &&
 			note.cw == null);
 
@@ -77,7 +77,7 @@ export default class extends Module {
 			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]));
 		}
 
-		this.ai.post({
+		this.nullcatChan.post({
 			text: text
 		});
 	}

@@ -1,4 +1,4 @@
-// AiOS bootstrapper
+// Nullcat chan! bootstrapper
 
 import 'module-alias/register';
 
@@ -6,7 +6,7 @@ import * as chalk from 'chalk';
 import * as request from 'request-promise-native';
 const promiseRetry = require('promise-retry');
 
-import 藍 from './ai';
+import NullcatChan from './nullcat-chan';
 import config from './config';
 import _log from './utils/log';
 const pkg = require('../package.json');
@@ -36,16 +36,17 @@ import TraceMoeModule from './modules/trace-moe';
 import WeatherModule from './modules/weather';
 import ServerModule from './modules/server';
 
-console.log('   __    ____  _____  ___ ');
-console.log('  /__\\  (_  _)(  _  )/ __)');
-console.log(' /(__)\\  _)(_  )(_)( \\__ \\');
-console.log('(__)(__)(____)(_____)(___/\n');
+console.log('    _   __      ____           __  ________                __     ');
+console.log('   / | / /_  __/ / /________ _/ /_/ ____/ /_  ____ _____  / /     ');
+console.log('  /  |/ / / / / / / ___/ __ `/ __/ /   / __ \\/ __ `/ __ \\/ /    ');
+console.log(' / /|  / /_/ / / / /__/ /_/ / /_/ /___/ / / / /_/ / / / /_/       ');
+console.log('/_/ |_/\\__,_/_/_/\\___/\\__,_/\\__/\\____/_/ /_/\\__,_/_/ /_(_)\n');
 
 function log(msg: string): void {
 	_log(`[Boot]: ${msg}`);
 }
 
-log(chalk.bold(`Ai v${pkg._v}`));
+log(chalk.bold(`Nullcat chan! v${pkg._v}`));
 
 promiseRetry(retry => {
 	log(`Account fetching... ${chalk.gray(config.host)}`);
@@ -62,10 +63,10 @@ promiseRetry(retry => {
 	const acct = `@${account.username}`;
 	log(chalk.green(`Account fetched successfully: ${chalk.underline(acct)}`));
 
-	log('Starting AiOS...');
+	log('Starting Nullcat chan...');
 
-	// 藍起動
-	new 藍(account, [
+	// ぬるきゃっとちゃん起動
+	new NullcatChan(account, [
 		new CoreModule(),
 		new EmojiReactModule(),
 		new FortuneModule(),
@@ -88,7 +89,7 @@ promiseRetry(retry => {
 		new WhatModule(),
 		new FeelingModule(),
 		new TraceMoeModule(),
-    	new WeatherModule(),
+    new WeatherModule(),
 		new ServerModule(),
 	]);
 }).catch(e => {

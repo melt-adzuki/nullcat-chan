@@ -6,9 +6,9 @@ services:
       args:
         - enable_mecab=1
     volumes:
-      - './config.json:/ai/config.json:ro'
-      - './font.ttf:/ai/font.ttf:ro'
-      - './data:/ai/data'
+      - './config.json:/nullcat-chan/config.json:ro'
+      - './font.ttf:/nullcat-chan/font.ttf:ro'
+      - './data:/nullcat-chan/data'
     restart: always
     environment:
       TZ: Asia/Tokyo

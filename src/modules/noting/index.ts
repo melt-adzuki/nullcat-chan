@@ -28,7 +28,7 @@ export default class extends Module {
 
 		// TODO: 季節に応じたセリフ
 
-		this.ai.post({
+		this.nullcatChan.post({
 			text: note
 		});
 	}
