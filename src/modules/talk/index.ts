@@ -31,6 +31,7 @@ export default class extends Module {
 			this.batou(msg) ||
 			this.itai(msg) ||
 			this.turai(msg) ||
+			this.kurusii(msg) ||
 			this.ote(msg) ||
 			this.ponkotu(msg) ||
 			this.rmrf(msg) ||
