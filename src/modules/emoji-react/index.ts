@@ -44,6 +44,6 @@ export default class extends Module {
 		if (includes(note.text, ['理解した', 'りかいした', 'わかった', '頑張った', 'がんばった'])) return react(':erai:');
 		if (includes(note.text, ['ねむい','ねむたい','ねたい'])) return react(':smoca:');
 		if (includes(note.text, ['ねれない','ねれん','ねれぬ'])) return react(':sairesu:');
-		
+		if (includes(note.text, ['うんこ'])) return react(':ti:');
 	}
 }
