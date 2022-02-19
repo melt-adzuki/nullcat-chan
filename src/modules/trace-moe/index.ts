@@ -110,10 +110,15 @@ export default class extends Module {
 						return null
 					}
 
-					if (!result.data.data) {
+					if (typeof result.data.errors !== "undefined") {
 						this.log("The API has returned a response with some error(s).")
-						console.warn(result.data.errors[0]?.message)
+						console.warn(result.data.errors[0].message)
 
+						return null
+					}
+
+					if (!result.data.data) {
+						this.log("No data returned from AniList.")
 						return null
 					}
 
