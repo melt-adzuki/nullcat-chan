@@ -62,9 +62,8 @@ export default class extends Module {
 				const result = this.schema.safeParse(data)
 
 				if (!result.success) {
-					this.log("Validation failed.")
+					this.log("Validation failed in getting AniListId.")
 					this.log(JSON.stringify(data))
-
 					console.warn(result.error)
 
 					return null
@@ -106,7 +105,8 @@ export default class extends Module {
 					const result = this.aniListSchema.safeParse(data)
 
 					if (!result.success) {
-						this.log("Validation failed.")
+						this.log("Validation failed in getting anime title.")
+						this.log(JSON.stringify(data))
 						console.warn(result.error)
 
 						return null
