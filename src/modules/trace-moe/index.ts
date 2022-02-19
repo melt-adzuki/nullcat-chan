@@ -162,7 +162,6 @@ export default class extends Module {
 						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
 						: `このアニメはたぶん『${animeTitle}』だよ！`
 
-
 				message.reply(messageToReply)
 				return true
     }
