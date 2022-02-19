@@ -84,7 +84,6 @@ export default class extends Module {
 						Media (id: $id, type: ANIME) {
 							title { native }
 						}
-					}
 				}`
 
 				const variables = { id }
@@ -126,7 +125,6 @@ export default class extends Module {
 
 					return null
 				}
-
 		}
 
     @autobind
