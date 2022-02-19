@@ -63,7 +63,7 @@ export default class extends Module {
 
 				if (!result.success) {
 					this.log("Validation failed.")
-					this.log(data)
+					this.log(JSON.stringify(data))
 
 					console.warn(result.error)
 
@@ -107,7 +107,7 @@ export default class extends Module {
 
 					if (!result.success) {
 						this.log("Validation failed.")
-						console.warn(JSON.stringify(result.error))
+						console.warn(result.error)
 
 						return null
 					}
