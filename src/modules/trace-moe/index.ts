@@ -109,10 +109,10 @@ export default class extends Module {
 				if (!imageUrl) return false
 
 				const aniListId = await this.getAniListId(imageUrl)
-				if(!aniListId) return false
+				if (!aniListId) return false
 
 				const animeTitle = await this.getAnimeTitle(aniListId)
-				if(!aniListId) return false
+				if (!aniListId) return false
 
 				message.reply(`このアニメはたぶん『${animeTitle}』だよ！`)
 				return true
