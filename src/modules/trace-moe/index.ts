@@ -154,13 +154,14 @@ export default class extends Module {
 				else if (Array.isArray(traceMoe.episode)) traceMoe.episode = traceMoe.episode.join("話と")
 
 				const messageToReply =
-						traceMoe.episode
-						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
+						traceMoe.episode && traceMoe.from && traceMoe.to
+						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
 						: traceMoe.from && traceMoe.to
 						? `これはたぶん『${animeTitle}』の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
-						: traceMoe.episode && traceMoe.from && traceMoe.to
-						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
+						: traceMoe.episode
+						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
 						: `このアニメはたぶん『${animeTitle}』だよ！`
+
 
 				message.reply(messageToReply)
 				return true
