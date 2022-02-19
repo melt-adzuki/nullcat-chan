@@ -25,6 +25,75 @@ export default class extends Module {
         result: z.array(this.itemSchema),
     })
 
+		@autobind
+		private getImageUrl(message: Message) {
+			const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
+
+			if (!filteredImageFiles.length) {
+				this.log("ファイルが不良品")
+				return null
+			}
+
+			return filteredImageFiles[0].url
+		}
+
+		@autobind
+		private async getAniListId(imageUrl: string) {
+			try {
+				const response = await fetch(`https://api.trace.moe/search?url=${encodeURIComponent(imageUrl)}`)
+
+				const data = await response.json()
+				const result = this.schema.safeParse(data)
+
+				if (!result.success) {
+					this.log("Validation failed.")
+					console.warn(result.error)
+
+					return null
+				}
+
+				return result.data.result[0].anilist
+
+			} catch (error) {
+				this.log("Failed to fetch status from Trace Moe.")
+				console.warn(error)
+
+				return null
+			}
+		}
+
+		@autobind
+		private async getAnimeTitle(id: number) {
+				const query = `{
+					Media (id: ${id}, type: ANIME) {
+						title { native }
+					}
+				}`
+
+				const options = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						body: JSON.stringify({ query }),
+					}
+				} as const
+
+				try {
+					const response = await fetch("https://graphql.anilist.co/", options)
+					const result = await response.json()
+
+					return z.string().nonempty().parse(result.data.Media.title.native)
+
+				} catch (error) {
+					this.log("Failed to get an anime title from AniList.")
+					console.warn(error)
+
+					return null
+				}
+
+		}
+
     @autobind
     public install() {
         return {
@@ -36,67 +105,15 @@ export default class extends Module {
     private async mentionHook(message: Message) {
         if (!message.includes(["アニメ"])) return false
 
-        const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
+				const imageUrl = this.getImageUrl(message)
+				if (!imageUrl) return false
 
-        if (!filteredImageFiles.length) {
-						this.log("ファイルが不良品")
-            return false
-        }
+				const aniListId = await this.getAniListId(imageUrl)
+				if(!aniListId) return false
 
-        const targetImage = filteredImageFiles[0]
+				const animeTitle = await this.getAnimeTitle(aniListId)
+				if(!aniListId) return false
 
-        let anilistId: number
-
-        try {
-            const response = await fetch(`https://api.trace.moe/search?url=${encodeURIComponent(targetImage.url)}`)
-
-						const data = await response.json()
-						const result = this.schema.safeParse(data)
-
-						if (!result.success) {
-        				this.log("Validation failed.")
-								console.warn(result.error)
-								return false
-						}
-
-						const firstData = result.data.result[0]
-						anilistId = firstData.anilist
-
-        } catch (error) {
-            	this.log("Failed to fetch status from Trace Moe.")
-            	console.warn(error)
-            	return false
-        }
-
-        const graphql = JSON.stringify({
-							query: "query ($id: Int) { \n  Media (id: $id, type: ANIME) { \n    id\n    title {\n      native\n        }\n    }\n}",
-            	variables: { id: anilistId }
-        })
-
-        const requestOptions = {
-            	method: "POST",
-            	body: graphql,
-            	redirect: "follow"
-        }
-
-				try {
-						const response = await fetch("https://graphql.anilist.co/", requestOptions)
-
-						const result = await response.json()
-						const native = result.data.Media.id.title.native
-
-						if (!native) {
-								return false
-						}
-
-						await message.reply(`僕の名前はぬるきゃだよ。ちなみに今の画像のアニメは${native}だよ。`)
-						return true
-
-				} catch (error) {
-						this.log("Failed to fetch status from AniList.")
-						console.warn(error)
-				}
-
-				return false
+				return true
     }
 }
