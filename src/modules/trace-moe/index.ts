@@ -26,7 +26,12 @@ export default class extends Module {
     })
 
 		private readonly aniListSchema = z.object({
-				errors: z.array(z.any()),
+				errors: z.array(
+					z.object({
+						message: z.string(),
+						status: z.number(),
+					}),
+				),
 				data: z.object({
 					Media: z.object({
 						title: z.object({
@@ -108,7 +113,7 @@ export default class extends Module {
 
 					if (!result.data.data) {
 						this.log("The API has returned a response with some error(s).")
-						console.warn(result.data.errors.toString())
+						console.warn(result.data.errors[0].message)
 
 						return null
 					}
