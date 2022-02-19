@@ -4,6 +4,7 @@ import autobind from "autobind-decorator"
 import Message from "@/message"
 import fetch from "node-fetch"
 
+const humanizeDuration = require("humanize-duration")
 
 export default class extends Module {
     public readonly name = "trace-moe"
@@ -153,11 +154,18 @@ export default class extends Module {
 				if (typeof traceMoe.episode === "string") traceMoe.episode = traceMoe.episode.replace("|", "か")
 				else if (Array.isArray(traceMoe.episode)) traceMoe.episode = traceMoe.episode.join("話と")
 
+
+				const humanizeDurationOptions = { language: "ja", round: true, delimiter: "", spacer: "" }
+
+				if (traceMoe.from) traceMoe.from = humanizeDuration(traceMoe.from * 1000, humanizeDurationOptions)
+				if (traceMoe.to) traceMoe.to = humanizeDuration(traceMoe.to * 1000, humanizeDurationOptions)
+
+
 				const messageToReply =
 						traceMoe.episode && traceMoe.from && traceMoe.to
-						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
+						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}から${traceMoe.to}だよ！`
 						: traceMoe.from && traceMoe.to
-						? `これはたぶん『${animeTitle}』の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
+						? `これはたぶん『${animeTitle}』の${traceMoe.from}から${traceMoe.to}だよ！`
 						: traceMoe.episode
 						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
 						: `このアニメはたぶん『${animeTitle}』だよ！`
