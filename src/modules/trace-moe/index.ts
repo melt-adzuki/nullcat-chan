@@ -30,7 +30,7 @@ export default class extends Module {
 					z.object({
 						message: z.string(),
 						status: z.number(),
-					}),
+					}).optional(),
 				),
 				data: z.object({
 					Media: z.object({
@@ -112,7 +112,7 @@ export default class extends Module {
 
 					if (!result.data.data) {
 						this.log("The API has returned a response with some error(s).")
-						console.warn(result.data.errors[0].message)
+						console.warn(result.data.errors[0]?.message)
 
 						return null
 					}
