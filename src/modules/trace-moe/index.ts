@@ -10,7 +10,7 @@ export default class extends Module {
 
     private readonly itemSchema = z.object({
         anilist: z.number(),
-				episode: z.number().nullable(),
+				episode: z.number().or(z.string()).or(z.array(z.number())).nullable(),
 				from: z.number().nullable(),
 				to: z.number().nullable(),
     })
@@ -148,6 +148,10 @@ export default class extends Module {
 
 				const animeTitle = await this.getAnimeTitle(traceMoe.anilist)
 				if (!animeTitle) return false
+
+
+				if (typeof traceMoe.episode === "string") traceMoe.episode = traceMoe.episode.replace("|", "か")
+				else if (Array.isArray(traceMoe.episode)) traceMoe.episode = traceMoe.episode.join("話と")
 
 				const messageToReply =
 						traceMoe.episode
