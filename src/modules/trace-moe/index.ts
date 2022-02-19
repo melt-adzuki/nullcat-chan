@@ -114,6 +114,7 @@ export default class extends Module {
 				const animeTitle = await this.getAnimeTitle(aniListId)
 				if(!aniListId) return false
 
+				message.reply(`このアニメはたぶん『${animeTitle}』だよ！`)
 				return true
     }
 }
