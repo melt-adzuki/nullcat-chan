@@ -25,6 +25,14 @@ export default class extends Module {
         result: z.array(this.itemSchema),
     })
 
+		private readonly aniListSchema = z.object({
+				Media: z.object({
+						title: z.object({
+							native: z.string(),
+					}),
+				}),
+		})
+
 		@autobind
 		private getImageUrl(message: Message) {
 			const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
@@ -81,9 +89,18 @@ export default class extends Module {
 
 				try {
 					const response = await fetch("https://graphql.anilist.co/", options)
-					const result = await response.json()
 
-					return z.string().nonempty().parse(result.data.Media.title.native)
+					const data = await response.json()
+					const result = this.aniListSchema.safeParse(data)
+
+					if (!result.success) {
+						this.log("Validation failed.")
+						console.warn(result.error)
+
+						return null
+					}
+
+					return result.data.Media.title.native
 
 				} catch (error) {
 					this.log("Failed to get an anime title from AniList.")
@@ -112,7 +129,7 @@ export default class extends Module {
 				if (!aniListId) return false
 
 				const animeTitle = await this.getAnimeTitle(aniListId)
-				if (!aniListId) return false
+				if (!animeTitle) return false
 
 				message.reply(`このアニメはたぶん『${animeTitle}』だよ！`)
 				return true
