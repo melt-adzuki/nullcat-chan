@@ -26,11 +26,14 @@ export default class extends Module {
     })
 
 		private readonly aniListSchema = z.object({
-				Media: z.object({
+				errors: z.array(z.any()),
+				data: z.object({
+					Media: z.object({
 						title: z.object({
 							native: z.string(),
+						}),
 					}),
-				}),
+				}).nullable(),
 		})
 
 		@autobind
@@ -72,19 +75,22 @@ export default class extends Module {
 
 		@autobind
 		private async getAnimeTitle(id: number) {
-				const query = `{
-					Media (id: ${id}, type: ANIME) {
-						title { native }
+				const query = `query ($id: Int) {
+						Media (id: $id, type: ANIME) {
+							title { native }
+						}
 					}
 				}`
 
+				const variables = { id }
+
 				const options = {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						"Accept": "application/json",
-						body: JSON.stringify({ query }),
-					}
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"Accept": "application/json",
+							body: JSON.stringify({ query, variables }),
+						},
 				} as const
 
 				try {
@@ -100,7 +106,14 @@ export default class extends Module {
 						return null
 					}
 
-					return result.data.Media.title.native
+					if (!result.data.data) {
+						this.log("The API has returned a response with some error(s).")
+						console.warn(result.data.errors.toString())
+
+						return null
+					}
+
+					return result.data.data.Media.title.native
 
 				} catch (error) {
 					this.log("Failed to get an anime title from AniList.")
