@@ -10,6 +10,9 @@ export default class extends Module {
 
     private readonly itemSchema = z.object({
         anilist: z.number(),
+				episode: z.number().nullable(),
+				from: z.number().nullable(),
+				to: z.number().nullable(),
     })
 
     private readonly schema = z.object({
@@ -46,7 +49,7 @@ export default class extends Module {
 		}
 
 		@autobind
-		private async getAniListId(imageUrl: string) {
+		private async getFromTraceMoe(imageUrl: string) {
 			try {
 				const response = await fetch(`https://api.trace.moe/search?url=${encodeURIComponent(imageUrl)}`)
 
@@ -61,7 +64,7 @@ export default class extends Module {
 					return null
 				}
 
-				return result.data.result[0].anilist
+				return result.data.result[0]
 
 			} catch (error) {
 				this.log("Failed to fetch status from Trace Moe.")
@@ -140,13 +143,22 @@ export default class extends Module {
 				const imageUrl = this.getImageUrl(message)
 				if (!imageUrl) return false
 
-				const aniListId = await this.getAniListId(imageUrl)
-				if (!aniListId) return false
+				const traceMoe = await this.getFromTraceMoe(imageUrl)
+				if (!traceMoe) return false
 
-				const animeTitle = await this.getAnimeTitle(aniListId)
+				const animeTitle = await this.getAnimeTitle(traceMoe.anilist)
 				if (!animeTitle) return false
 
-				message.reply(`このアニメはたぶん『${animeTitle}』だよ！`)
+				const messageToReply =
+						traceMoe.episode
+						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
+						: traceMoe.from && traceMoe.to
+						? `これはたぶん『${animeTitle}』の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
+						: traceMoe.episode && traceMoe.from && traceMoe.to
+						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}秒から${traceMoe.to}秒だよ！`
+						: `このアニメはたぶん『${animeTitle}』だよ！`
+
+				message.reply(messageToReply)
 				return true
     }
 }
