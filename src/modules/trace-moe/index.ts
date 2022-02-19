@@ -10,13 +10,6 @@ export default class extends Module {
 
     private readonly itemSchema = z.object({
         anilist: z.number(),
-        filename: z.string(),
-        episode: z.number(),
-        from: z.number(),
-        to: z.number(),
-        similarity: z.number(),
-        video: z.string().url(),
-        image: z.string().url(),
     })
 
     private readonly schema = z.object({
