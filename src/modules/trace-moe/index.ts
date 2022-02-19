@@ -63,6 +63,8 @@ export default class extends Module {
 
 				if (!result.success) {
 					this.log("Validation failed.")
+					this.log(data)
+					
 					console.warn(result.error)
 
 					return null
