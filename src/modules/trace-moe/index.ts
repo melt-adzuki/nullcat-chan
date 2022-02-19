@@ -58,7 +58,7 @@ export default class extends Module {
 				const result = this.schema.safeParse(data)
 
 				if (!result.success) {
-					this.log("Validation failed in getting AniListId.")
+					this.log("Validation failed in getting from Trace Moe.")
 					this.log(JSON.stringify(data))
 					console.warn(result.error)
 
