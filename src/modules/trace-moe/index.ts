@@ -93,8 +93,8 @@ export default class extends Module {
 						headers: {
 							"Content-Type": "application/json",
 							"Accept": "application/json",
-							body: JSON.stringify({ query, variables }),
 						},
+						body: JSON.stringify({ query, variables }),
 				} as const
 
 				try {
