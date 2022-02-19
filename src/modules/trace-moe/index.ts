@@ -13,7 +13,6 @@ export default class extends Module {
     })
 
     private readonly schema = z.object({
-        frameCount: z.number(),
         error: z.string(),
         result: z.array(this.itemSchema),
     })
