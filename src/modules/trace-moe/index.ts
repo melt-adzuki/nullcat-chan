@@ -30,8 +30,8 @@ export default class extends Module {
 					z.object({
 						message: z.string(),
 						status: z.number(),
-					}).optional(),
-				),
+					}),
+				).optional(),
 				data: z.object({
 					Media: z.object({
 						title: z.object({
