@@ -29,6 +29,11 @@ export default class extends Module {
 
 		@autobind
 		private getImageUrl(message: Message) {
+				if (!message.files) {
+						this.log("No files found.")
+						return null
+				}
+
 				const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
 
 				if (!filteredImageFiles.length) {
@@ -75,6 +80,11 @@ export default class extends Module {
     @autobind
     private async mentionHook(message: Message) {
         if (!message.includes(["アニメ"])) return false
+
+				if (message.isDm) {
+						message.reply("僕にアニメのシーンの画像を添付して「アニメ教えて」ってメンションすると、何のアニメか教えるよ！")
+						return true
+				}
 
 				const imageUrl = this.getImageUrl(message)
 
