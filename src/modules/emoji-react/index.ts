@@ -45,6 +45,6 @@ export default class extends Module {
 		if (includes(note.text, ['ねむい','ねむたい','ねたい'])) return react(':smoca:');
 		if (includes(note.text, ['ねれない','ねれん','ねれぬ'])) return react(':sairesu:');
 		if (note.text.match(/う[～|ー]*んこ/) || note.text.match(/unko/)) return react(':anataima_unkotte_iimashitane:');
-		if (note.text.match(/う[～|ー]*ん/) || note.text.match(/un/)) return react(':ti:');
+		if (note.text.match(/う[～|ー]*ん$/) || note.text.match(/un$/)) return react(':ti:');
 	}
 }

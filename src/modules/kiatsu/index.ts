@@ -27,14 +27,16 @@ export default class extends Module {
 		dayaftertomorrow: z.array(this.itemSchema).optional(),
 	})
 
+	private currentPressure: z.infer<typeof this.itemSchema>["pressure"] = ""
+
 	private currentPressureLevel: z.infer<typeof this.itemSchema>["pressure_level"] = "0"
 
-	private readonly stringPressureLevel: { [K in typeof this.currentPressureLevel]: string } = {
-		0: "問題ないかも。無理しないでね。",
-		1: "問題ないかも。無理しないでね。",
-		2: "気圧ちょっとやばいかも。無理しないでね。",
-		3: "気圧やばいかも。無理しないでね。",
-		4: "気圧かなりやばいかも。無理しないでね。",
+	private readonly stringPressureLevel: { [K in typeof this.currentPressureLevel]: (hPa: string) => string } = {
+		0: hPa => `${hPa}hPaだから問題ないかも。無理しないでね。`,
+		1: hPa => `${hPa}hPaだから問題ないかも。無理しないでね。`,
+		2: hPa => `気圧${hPa}hPaでちょっとやばいかも。無理しないでね。`,
+		3: hPa => `気圧${hPa}hPaでやばいかも。無理しないでね。`,
+		4: hPa => `気圧${hPa}hPaでかなりやばいかも。無理しないでね。`,
 	} as const
 
 	@autobind
@@ -68,6 +70,7 @@ export default class extends Module {
 			const hour = this.itemSchema.shape.time.parse(date.getHours().toString())
 
 			this.currentPressureLevel = result.data.today[hour].pressure_level
+			this.currentPressure = result.data.today[hour].pressure
 
 		} catch (error) {
 			this.log("Failed to fetch status.")
@@ -80,7 +83,7 @@ export default class extends Module {
 		if (this.currentPressureLevel === "0" || this.currentPressureLevel === "1") return
 
 		this.nullcatChan.post({
-			text: this.stringPressureLevel[this.currentPressureLevel],
+			text: this.stringPressureLevel[this.currentPressureLevel](this.currentPressure),
 		})
 	}
 
@@ -88,10 +91,11 @@ export default class extends Module {
 	private async mentionHook(message: Message) {
 		if (!message.includes(["気圧", "きあつ"])) return false
 
-		message.reply(this.stringPressureLevel[this.currentPressureLevel], {
-			immediate: true,
-		})
-		
+		message.reply(
+			this.stringPressureLevel[this.currentPressureLevel](this.currentPressure),
+			{ immediate: true }
+		)
+
 		return true
 	}
 }

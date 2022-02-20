@@ -60,7 +60,7 @@ export default class Message {
 		return this.messageOrNote.renoteId;
 	}
 
-	public get files(): MisskeyFile[] {
+	public get files(): MisskeyFile[] | undefined {
 		return this.messageOrNote.files;
 	}
 	/**
