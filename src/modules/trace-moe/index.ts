@@ -110,7 +110,7 @@ export default class extends Module {
 						traceMoe.to = humanizeDuration(traceMoe.to * 1000, options)
 				}
 
-				const pronoun = traceMoe.episode ? "これは" : "このアニメは"
+				const pronoun = traceMoe.episode && traceMoe.from && traceMoe.to ? "これは" : "このアニメは"
 
 				const prefix =
 						traceMoe.similarity >= 0.9
