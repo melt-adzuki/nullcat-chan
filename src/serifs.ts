@@ -241,14 +241,14 @@ export default {
 	},
 
 	sleepReport: {
-		report: hours => `んみゃぁ、${hours}時間くらいねちゃってたかも`,
-		reportUtatane: 'んみゃ... ',
+		report: hours => `んぬぁ～、${hours}時間くらいねちゃってたかも`,
+		reportUtatane: 'ぬぁ... ',
 	},
 
 	noting: {
 		notes: [
 			'うみゅ',
-			'んみゃぁ～',
+			'んぬぁ～',
 			'ねむい',
 			'さみしい',
 			'なでてぇ',
@@ -263,6 +263,11 @@ export default {
 			'ぬるきゃっとちゃんだよ！',
 			'進捗どうですか',
 			'おふとんふわふわ～',
+			'うぐぅ',
+			'ぬぁ～ん',
+			'にﾞ',
+			'ぎゅ～～～',
+			'むぅ',
 		],
 	},
 };

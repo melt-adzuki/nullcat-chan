@@ -15,7 +15,7 @@ export default class extends Module {
 
 	@autobind
 	private async mentionHook(message: Message) {
-		if (!message.includes(["って何", "ってなに", "ってにゃに"])) return false
+		if (!message.includes(["って何", "ってなに", "ってにゃに", ":is_nani:"])) return false
 
 		const match = message.extractedText.match(/(.+?)って(何|なに|にゃに)/)
 
