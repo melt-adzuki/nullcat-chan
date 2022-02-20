@@ -135,7 +135,7 @@ export default class extends Module {
 				const messageToReply = `${prefix}${content}${suffix}`
 
 				if (traceMoe.anilist.isAdult) {
-						message.reply("そぎぎ", { cw: messageToReply })
+						message.reply(messageToReply, { cw: "そぎぎ" })
 				} else {
 						message.reply(messageToReply)
 				}
