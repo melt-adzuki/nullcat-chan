@@ -113,18 +113,18 @@ export default class extends Module {
 				const pronoun = traceMoe.episode ? "これは" : "このアニメは"
 
 				const prefix =
-						traceMoe.similarity
-						? traceMoe.similarity < 0.9
-								? "よくわかんないけど、強いて言うなら"
-								: `${pronoun}`
-						: `${pronoun}たぶん`
+						traceMoe.similarity >= 0.9
+						? `${pronoun}`
+						: traceMoe.similarity >= 0.8
+						? `${pronoun}たぶん`
+						: "よくわかんないけど、強いて言うなら"
 
 				const suffix =
-						traceMoe.similarity
-						? traceMoe.similarity < 0.9
-								? "に似てるかな"
-								: "だよ！"
-						: "だよ！"
+						traceMoe.similarity >= 0.9
+						? "だよ！"
+						: traceMoe.similarity >= 0.8
+						? `だと思う！`
+						: "に似てるかな"
 
 				const time =
 						(traceMoe.from && traceMoe.to) && (traceMoe.from === traceMoe.to)
