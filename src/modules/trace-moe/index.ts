@@ -10,10 +10,16 @@ export default class extends Module {
     public readonly name = "trace-moe"
 
     private readonly itemSchema = z.object({
-        anilist: z.number(),
+        anilist: z.object({
+						title: z.object({
+								native: z.string(),
+						}),
+						isAdult: z.boolean(),
+				}),
 				episode: z.number().or(z.string()).or(z.array(z.number())).nullable(),
 				from: z.number().nullable(),
 				to: z.number().nullable(),
+				similarity: z.number(),
     })
 
     private readonly schema = z.object({
@@ -21,112 +27,41 @@ export default class extends Module {
         result: z.array(this.itemSchema),
     })
 
-		private readonly aniListSchema = z.object({
-				errors: z.array(
-					z.object({
-						message: z.string(),
-						status: z.number(),
-					}),
-				).optional(),
-				data: z.object({
-					Media: z.object({
-						title: z.object({
-							native: z.string(),
-						}),
-					}),
-				}).nullable(),
-		})
-
 		@autobind
 		private getImageUrl(message: Message) {
-			const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
+				const filteredImageFiles = message.files.filter(file => file.type.startsWith("image"))
 
-			if (!filteredImageFiles.length) {
-				this.log("ファイルが不良品")
-				return null
-			}
+				if (!filteredImageFiles.length) {
+						this.log("No vaid images found.")
+						return null
+				}
 
-			return filteredImageFiles[0].url
+				return filteredImageFiles[0].url
 		}
 
 		@autobind
 		private async getFromTraceMoe(imageUrl: string) {
-			try {
-				const response = await fetch(`https://api.trace.moe/search?url=${encodeURIComponent(imageUrl)}`)
-
-				const data = await response.json()
-				const result = this.schema.safeParse(data)
-
-				if (!result.success) {
-					this.log("Validation failed in getting from Trace Moe.")
-					this.log(JSON.stringify(data))
-					console.warn(result.error)
-
-					return null
-				}
-
-				return result.data.result[0]
-
-			} catch (error) {
-				this.log("Failed to fetch status from Trace Moe.")
-				console.warn(error)
-
-				return null
-			}
-		}
-
-		@autobind
-		private async getAnimeTitle(id: number) {
-				const query = `query ($id: Int) {
-						Media (id: $id, type: ANIME) {
-							title { native }
-						}
-				}`
-
-				const variables = { id }
-
-				const options = {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-							"Accept": "application/json",
-						},
-						body: JSON.stringify({ query, variables }),
-				} as const
-
 				try {
-					const response = await fetch("https://graphql.anilist.co/", options)
+						const response = await fetch(`https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(imageUrl)}`)
 
-					const data = await response.json()
-					const result = this.aniListSchema.safeParse(data)
+						const data = await response.json()
+						const result = this.schema.safeParse(data)
 
-					if (!result.success) {
-						this.log("Validation failed in getting anime title.")
-						this.log(JSON.stringify(data))
-						console.warn(result.error)
+						if (!result.success) {
+								this.log("Validation failed.")
+								this.log(JSON.stringify(data))
+								console.warn(result.error)
 
-						return null
-					}
+								return null
+						}
 
-					if (typeof result.data.errors !== "undefined") {
-						this.log("The API has returned a response with some error(s).")
-						console.warn(result.data.errors[0].message)
-
-						return null
-					}
-
-					if (!result.data.data) {
-						this.log("No data returned from AniList.")
-						return null
-					}
-
-					return result.data.data.Media.title.native
+						return result.data.result[0]
 
 				} catch (error) {
-					this.log("Failed to get an anime title from AniList.")
-					console.warn(error)
+						this.log("Failed to fetch data from Trace Moe.")
+						console.warn(error)
 
-					return null
+						return null
 				}
 		}
 
@@ -142,35 +77,69 @@ export default class extends Module {
         if (!message.includes(["アニメ"])) return false
 
 				const imageUrl = this.getImageUrl(message)
-				if (!imageUrl) return false
+
+				if (!imageUrl) {
+						message.reply("画像を添付してね！")
+						return true
+				}
 
 				const traceMoe = await this.getFromTraceMoe(imageUrl)
-				if (!traceMoe) return false
 
-				const animeTitle = await this.getAnimeTitle(traceMoe.anilist)
-				if (!animeTitle) return false
-
+				if (!traceMoe) {
+						message.reply("う～ん、わかんない！")
+						return true
+				}
 
 				if (typeof traceMoe.episode === "string") traceMoe.episode = traceMoe.episode.replace("|", "か")
 				else if (Array.isArray(traceMoe.episode)) traceMoe.episode = traceMoe.episode.join("話と")
 
+				if (traceMoe.from && traceMoe.to) {
+						const options = { language: "ja", round: true, delimiter: "", spacer: "" }
 
-				const humanizeDurationOptions = { language: "ja", round: true, delimiter: "", spacer: "" }
+						traceMoe.from = humanizeDuration(traceMoe.from * 1000, options)
+						traceMoe.to = humanizeDuration(traceMoe.to * 1000, options)
+				}
 
-				if (traceMoe.from) traceMoe.from = humanizeDuration(traceMoe.from * 1000, humanizeDurationOptions)
-				if (traceMoe.to) traceMoe.to = humanizeDuration(traceMoe.to * 1000, humanizeDurationOptions)
+				const pronoun = traceMoe.episode ? "これは" : "このアニメは"
 
+				const prefix =
+						traceMoe.similarity
+						? traceMoe.similarity < 0.9
+								? "よくわかんなかったけど、強いて言うなら"
+								: `${pronoun}`
+						: `${pronoun}たぶん`
 
-				const messageToReply =
+				const suffix =
+						traceMoe.similarity
+						? traceMoe.similarity < 0.9
+								? "に似てるかな"
+								: "だよ！"
+						: "だよ！"
+
+				const time =
+						(traceMoe.from && traceMoe.to) && (traceMoe.from === traceMoe.to)
+						? traceMoe.from
+						: `${traceMoe.from}から${traceMoe.to}`
+
+				const animeTitle = traceMoe.anilist.title.native
+
+				const content =
 						traceMoe.episode && traceMoe.from && traceMoe.to
-						? `これはたぶん『${animeTitle}』第${traceMoe.episode}話の${traceMoe.from}から${traceMoe.to}だよ！`
+						? `『${animeTitle}』第${traceMoe.episode}話の${time}`
 						: traceMoe.from && traceMoe.to
-						? `これはたぶん『${animeTitle}』の${traceMoe.from}から${traceMoe.to}だよ！`
+						? `『${animeTitle}』の${time}`
 						: traceMoe.episode
-						? `これはたぶん『${animeTitle}』の第${traceMoe.episode}話だよ！`
-						: `このアニメはたぶん『${animeTitle}』だよ！`
+						? `『${animeTitle}』の第${traceMoe.episode}話`
+						: `『${animeTitle}』`
 
-				message.reply(messageToReply)
+				const messageToReply = `${prefix}${content}${suffix}`
+
+				if (traceMoe.anilist.isAdult) {
+						message.reply("そぎぎ", { cw: messageToReply })
+				} else {
+						message.reply(messageToReply)
+				}
+
 				return true
     }
 }
