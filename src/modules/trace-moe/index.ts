@@ -115,7 +115,7 @@ export default class extends Module {
 				const prefix =
 						traceMoe.similarity
 						? traceMoe.similarity < 0.9
-								? "よくわかんなかったけど、強いて言うなら"
+								? "よくわかんないけど、強いて言うなら"
 								: `${pronoun}`
 						: `${pronoun}たぶん`
 
