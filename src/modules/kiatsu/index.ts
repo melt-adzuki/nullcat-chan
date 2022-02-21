@@ -1,9 +1,8 @@
+import Message from "@/message"
+import Module from "@/module"
 import autobind from "autobind-decorator"
 import fetch from "node-fetch"
 import { z } from "zod"
-
-import Module from "@/module"
-import Message from "@/message"
 
 export default class extends Module {
 	public readonly name = "kiatsu"
@@ -32,11 +31,11 @@ export default class extends Module {
 	private currentPressureLevel: z.infer<typeof this.itemSchema>["pressure_level"] = "0"
 
 	private readonly stringPressureLevel: { [K in typeof this.currentPressureLevel]: (hPa: string) => string } = {
-		0: hPa => `${hPa}hPaだから問題ないかも。無理しないでね。`,
-		1: hPa => `${hPa}hPaだから問題ないかも。無理しないでね。`,
-		2: hPa => `気圧${hPa}hPaでちょっとやばいかも。無理しないでね。`,
-		3: hPa => `気圧${hPa}hPaでやばいかも。無理しないでね。`,
-		4: hPa => `気圧${hPa}hPaでかなりやばいかも。無理しないでね。`,
+		0: (hPa) => `${hPa}hPaだから問題ないかも。無理しないでね。`,
+		1: (hPa) => `${hPa}hPaだから問題ないかも。無理しないでね。`,
+		2: (hPa) => `気圧${hPa}hPaでちょっとやばいかも。無理しないでね。`,
+		3: (hPa) => `気圧${hPa}hPaでやばいかも。無理しないでね。`,
+		4: (hPa) => `気圧${hPa}hPaでかなりやばいかも。無理しないでね。`,
 	} as const
 
 	@autobind
@@ -71,7 +70,6 @@ export default class extends Module {
 
 			this.currentPressureLevel = result.data.today[hour].pressure_level
 			this.currentPressure = result.data.today[hour].pressure
-
 		} catch (error) {
 			this.log("Failed to fetch status.")
 			console.warn(error)
@@ -91,10 +89,7 @@ export default class extends Module {
 	private async mentionHook(message: Message) {
 		if (!message.includes(["気圧", "きあつ"])) return false
 
-		message.reply(
-			this.stringPressureLevel[this.currentPressureLevel](this.currentPressure),
-			{ immediate: true }
-		)
+		message.reply(this.stringPressureLevel[this.currentPressureLevel](this.currentPressure), { immediate: true })
 
 		return true
 	}

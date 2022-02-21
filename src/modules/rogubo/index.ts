@@ -1,6 +1,6 @@
-import autobind from "autobind-decorator"
 import Module from "@/module"
 import serifs from "@/serifs"
+import autobind from "autobind-decorator"
 
 const accurateInterval = require("accurate-interval")
 
@@ -9,11 +9,7 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		accurateInterval(
-			this.post,
-			1000 * 60 * 60,
-			{ aligned: true, immediate: true }
-		)
+		accurateInterval(this.post, 1000 * 60 * 60, { aligned: true, immediate: true })
 
 		return {}
 	}
