@@ -1,10 +1,9 @@
+import config from "@/config"
+import Message from "@/message"
+import Module from "@/module"
 import autobind from "autobind-decorator"
 import fetch from "node-fetch"
 import { z } from "zod"
-
-import Module from "@/module"
-import Message from "@/message"
-import config from "@/config"
 
 export default class extends Module {
 	public readonly name = "github-status"
@@ -30,7 +29,7 @@ export default class extends Module {
 		}
 
 		return {
-			mentionHook: this.mentionHook
+			mentionHook: this.mentionHook,
 		}
 	}
 
@@ -49,7 +48,6 @@ export default class extends Module {
 				this.log("Validation failed.")
 				console.warn(result.error)
 			}
-
 		} catch (error) {
 			this.log("Failed to fetch status from GitHub.")
 			console.warn(error)
@@ -63,12 +61,12 @@ export default class extends Module {
 			case "major":
 			case "critical":
 				this.nullcatChan.post({
-					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`
+					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`,
 				})
 
 				this.log("Report posted.")
 				break
-			
+
 			default:
 				break
 		}
@@ -77,12 +75,10 @@ export default class extends Module {
 	@autobind
 	private async mentionHook(msg: Message) {
 		if (msg.text?.toLowerCase().includes("github")) {
-
 			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`, {
 				immediate: true,
 			})
 			return true
-
 		} else {
 			return false
 		}

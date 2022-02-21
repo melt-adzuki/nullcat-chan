@@ -1,98 +1,95 @@
-import autobind from 'autobind-decorator';
-import * as loki from 'lokijs';
-import Module from '@/module';
-import config from '@/config';
-import serifs from '@/serifs';
-import { mecab } from './mecab';
-import Message from '@/message';
+import config from "@/config"
+import Message from "@/message"
+import Module from "@/module"
+import serifs from "@/serifs"
+import autobind from "autobind-decorator"
+import * as loki from "lokijs"
+import { mecab } from "./mecab"
 
 function kanaToHira(str: string) {
-	return str.replace(/[\u30a1-\u30f6]/g, match => {
-		const chr = match.charCodeAt(0) - 0x60;
-		return String.fromCharCode(chr);
-	});
+	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
+		const chr = match.charCodeAt(0) - 0x60
+		return String.fromCharCode(chr)
+	})
 }
 
 export default class extends Module {
-	public readonly name = 'keyword';
+	public readonly name = "keyword"
 
 	private learnedKeywords: loki.Collection<{
-		keyword: string;
-		learnedAt: number;
-	}>;
+		keyword: string
+		learnedAt: number
+	}>
 
 	@autobind
 	public install() {
-		if (!config.keywordEnabled) return {};
+		if (!config.keywordEnabled) return {}
 
-		this.learnedKeywords = this.nullcatChan.getCollection('_keyword_learnedKeywords', {
-			indices: ['userId']
-		});
+		this.learnedKeywords = this.nullcatChan.getCollection("_keyword_learnedKeywords", {
+			indices: ["userId"],
+		})
 
-		setInterval(this.learn, 1000 * 60 * 45);
+		setInterval(this.learn, 1000 * 60 * 45)
 
 		return {
-			mentionHook: this.mentionHook
-		};
+			mentionHook: this.mentionHook,
+		}
 	}
 
 	@autobind
 	private async learn() {
-		const tl = await this.nullcatChan.api('notes/local-timeline', {
-			limit: 30
-		});
+		const tl = await this.nullcatChan.api("notes/local-timeline", {
+			limit: 30,
+		})
 
-		const interestedNotes = tl.filter(note =>
-			note.userId !== this.nullcatChan.account.id &&
-			note.text != null &&
-			note.cw == null);
+		const interestedNotes = tl.filter((note) => note.userId !== this.nullcatChan.account.id && note.text != null && note.cw == null)
 
-		let keywords: string[][] = [];
+		let keywords: string[][] = []
 
 		for (const note of interestedNotes) {
-			const tokens = await mecab(note.text, config.mecab, config.mecabDic);
-			const keywordsInThisNote = tokens.filter(token => token[2] == '固有名詞' && token[8] != null);
-			keywords = keywords.concat(keywordsInThisNote);
+			const tokens = await mecab(note.text, config.mecab, config.mecabDic)
+			const keywordsInThisNote = tokens.filter((token) => token[2] == "固有名詞" && token[8] != null)
+			keywords = keywords.concat(keywordsInThisNote)
 		}
 
-		if (keywords.length === 0) return;
+		if (keywords.length === 0) return
 
-		const rnd = Math.floor((1 - Math.sqrt(Math.random())) * keywords.length);
-		const keyword = keywords.sort((a, b) => a[0].length < b[0].length ? 1 : -1)[rnd];
+		const rnd = Math.floor((1 - Math.sqrt(Math.random())) * keywords.length)
+		const keyword = keywords.sort((a, b) => (a[0].length < b[0].length ? 1 : -1))[rnd]
 
 		const exist = this.learnedKeywords.findOne({
-			keyword: keyword[0]
-		});
+			keyword: keyword[0],
+		})
 
-		let text: string;
+		let text: string
 
 		if (exist) {
-			return;
+			return
 		} else {
 			this.learnedKeywords.insertOne({
 				keyword: keyword[0],
-				learnedAt: Date.now()
-			});
+				learnedAt: Date.now(),
+			})
 
-			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]));
+			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]))
 		}
 
 		this.nullcatChan.post({
-			text: text
-		});
+			text: text,
+		})
 	}
 
 	@autobind
 	private async mentionHook(msg: Message) {
-		if (msg.includes(['覚えて', 'おぼえて'])) {
-			this.log('Keyword learn requested');
-			msg.reply('がんばってみるね');
-			this.learn();
+		if (msg.includes(["覚えて", "おぼえて"])) {
+			this.log("Keyword learn requested")
+			msg.reply("がんばってみるね")
+			this.learn()
 			return {
-				reaction: 'like'
-			};
+				reaction: "like",
+			}
 		} else {
-			return false;
+			return false
 		}
 	}
 }

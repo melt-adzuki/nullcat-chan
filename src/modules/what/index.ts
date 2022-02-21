@@ -1,7 +1,6 @@
-import autobind from "autobind-decorator"
-
-import Module from "@/module"
 import Message from "@/message"
+import Module from "@/module"
+import autobind from "autobind-decorator"
 
 export default class extends Module {
 	public readonly name = "what"
@@ -9,7 +8,7 @@ export default class extends Module {
 	@autobind
 	public install() {
 		return {
-			mentionHook: this.mentionHook
+			mentionHook: this.mentionHook,
 		}
 	}
 
