@@ -3,5 +3,9 @@ built
 node_modules
 memory.json
 font.ttf
+<<<<<<< HEAD
+./.idea
+=======
 # Intelij-IDEA
 /.idea
+>>>>>>> master
