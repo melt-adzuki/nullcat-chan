@@ -36,7 +36,7 @@ export default class extends Module {
 		const filteredImageFiles = message.files.filter((file) => file.type.startsWith("image"))
 
 		if (!filteredImageFiles.length) {
-			this.log("No vaid images found.")
+			this.log("No valid images found.")
 			return null
 		}
 
