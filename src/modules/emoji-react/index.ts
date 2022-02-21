@@ -40,10 +40,8 @@ export default class extends Module {
 
 		if (await gomamayo.find(note.text)) return react(':bikkuribikkuri_:');
 		if (includes(note.text, ['ぬるきゃっとちゃん','Nullcat chan'])) return react(':bibibi_nullcat:');
-		if (includes(note.text, ['ふむ','むふ','つらい','つらすぎ','死にたい','つかれた','疲れた','しにたい','きえたい','消えたい','やだ','いやだ','なきそう','泣きそう','辛い'])) return react(':nadenade_neko:');
+		if (includes(note.text, ['ねむい','ねむたい','ねたい','ねれない','ねれん','ねれぬ','ふむ','むふ','つらい','つらすぎ','死にたい','つかれた','疲れた','しにたい','きえたい','消えたい','やだ','いやだ','なきそう','泣きそう','辛い'])) return react(':nadenade_neko:');
 		if (includes(note.text, ['理解した', 'りかいした', 'わかった', '頑張った', 'がんばった'])) return react(':erai:');
-		if (includes(note.text, ['ねむい','ねむたい','ねたい'])) return react(':smoca:');
-		if (includes(note.text, ['ねれない','ねれん','ねれぬ'])) return react(':sairesu:');
 		if (note.text.match(/う[～|ー]*んこ/) || note.text.match(/unko/)) return react(':anataima_unkotte_iimashitane:');
 		if (note.text.match(/う[～|ー]*ん$/) || note.text.match(/un$/)) return react(':ti_:');
 	}
