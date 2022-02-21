@@ -130,8 +130,8 @@ export default class extends Module {
 
 		const contentArr = [`『${animeTitle}』`]
 		if (traceMoe.episode) contentArr.push(`第${traceMoe.episode}話`)
-		if (traceMoe.from && traceMoe.to) contentArr.push(time)
-		const content = contentArr.join("の")
+		if (traceMoe.from && traceMoe.to) contentArr.push(`の${time}`)
+		const content = contentArr.join("")
 
 		const messageToReply = `${prefix}${content}${suffix}`
 
