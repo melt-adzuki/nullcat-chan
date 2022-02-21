@@ -128,10 +128,13 @@ export default class extends Module {
 
 		const animeTitle = traceMoe.anilist.title.native
 
-		const contentArr = [`『${animeTitle}』`]
-		if (traceMoe.episode) contentArr.push(`第${traceMoe.episode}話`)
-		if (traceMoe.from && traceMoe.to) contentArr.push(time)
-		const content = contentArr.join("の")
+		const detail = (() => {
+			if (traceMoe.episode && traceMoe.from && traceMoe.to) return `第${traceMoe.episode}話の${time}`
+			if (traceMoe.from && traceMoe.to) return `の${time}`
+			if (traceMoe.episode) return `の第${traceMoe.episode}話`
+			return ""
+		})()
+		const content = `『${animeTitle}』${detail}`
 
 		const messageToReply = `${prefix}${content}${suffix}`
 
