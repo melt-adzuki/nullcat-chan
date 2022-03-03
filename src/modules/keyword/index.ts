@@ -38,7 +38,7 @@ export default class extends Module {
 
 	@autobind
 	private async learn() {
-		const tl = await this.nullcatChan.api("notes/local-timeline", {
+		const tl = await this.nullcatChan.api("notes/hybrid-timeline", {
 			limit: 30,
 		})
 
