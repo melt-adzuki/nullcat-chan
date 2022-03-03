@@ -30,6 +30,7 @@ import WhatModule from "./modules/what"
 import YarukotoModule from "./modules/yarukoto"
 import NullcatChan from "./nullcat-chan"
 import _log from "./utils/log"
+import ShellGeiModule from './modules/shellgei';
 
 const promiseRetry = require("promise-retry")
 
@@ -96,6 +97,7 @@ promiseRetry(
 			new TraceMoeModule(),
 			new WeatherModule(),
 			new ServerModule(),
+			new ShellGeiModule(),
 		])
 	})
 	.catch((e) => {
