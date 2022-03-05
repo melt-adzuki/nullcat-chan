@@ -38,13 +38,13 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecabDic": "MeCab の辞書ファイルパス (オプション)",
 	"memoryDir": "memory.jsonの保存先（オプション、デフォルトは'.'（レポジトリのルートです））",
 	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
-	"shellgeiUrl": "シェル芸BotのAPIのURLです"
+	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```
 `npm install` して `npm run build` して `npm start` すれば起動できます。
 
 ### Dockerで動かす
-まず適当なディレクトリに `git clone` します。
+まず適当なディレクトリに `git clone` します。<br>
 次にそのディレクトリに `config.json` を作成します。中身は次のようにします:
 （MeCabの設定、memoryDirについては触らないでください）
 ``` json
@@ -58,10 +58,10 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecabDic": "/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/",
 	"memoryDir": "data",
 	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
-	"shellgeiUrl": "シェル芸BotのAPIのURLです"
+	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```
-`docker-compose build` して `docker-compose up` すれば起動できます。
+`npm install` して `npm run docker` すれば起動できます。<br>
 `docker-compose.yml` の `enable_mecab` を `0` にすると、MeCabをインストールしないようにもできます。（メモリが少ない環境など）
 
 #### 一部の機能にはフォントが必要です。僕にはフォントは同梱されていないので、ご自身でフォントをインストールしてそのフォントを`font.ttf`という名前でインストールディレクトリに設置してください。
