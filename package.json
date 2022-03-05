@@ -3,7 +3,7 @@
 	"main": "./built/index.js",
 	"scripts": {
 		"docker:dev": "cross-env DOCKER_ENV=development docker-compose -f docker-compose.yml -f docker-compose_development.yml up -d --build && docker-compose logs -f",
-		"docker:production": "cross-env DOCKER_ENV=production docker-compose up -d --build && docker-compose logs -f",
+		"docker": "cross-env DOCKER_ENV=production docker-compose up -d --build && docker-compose logs -f",
 		"dev": "cross-env NODE_ENV=development node ./built",
 		"start": "cross-env NODE_ENV=production node ./built",
 		"build": "tsc",
