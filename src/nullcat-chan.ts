@@ -202,6 +202,7 @@ export default class NullcatChan {
 		setInterval(this.logWaking, 10000)
 
 		this.log(chalk.green.bold("Nullcat chan is now running!"))
+		this.log(`Mode: ${process.env.NODE_ENV}`)
 	}
 
 	/**
@@ -381,8 +382,14 @@ export default class NullcatChan {
 	 */
 	@autobind
 	public async post(param: any) {
-		const res = await this.api("notes/create", param)
-		return res.createdNote
+		if (process.env.NODE_ENV === "production") {
+			const res = await this.api("notes/create", param)
+			return res.createdNote
+
+		} else {
+			log(chalk`[{magenta Debug:Post}]: ${JSON.stringify(param)}`)
+			return null
+		}
 	}
 
 	/**
@@ -390,15 +397,22 @@ export default class NullcatChan {
 	 */
 	@autobind
 	public sendMessage(userId: any, param: any) {
-		return this.api(
-			"messaging/messages/create",
-			Object.assign(
-				{
-					userId: userId,
-				},
-				param
+		if (process.env.NODE_ENV === "production") {
+			return this.api(
+				"messaging/messages/create",
+				Object.assign(
+					{
+						userId: userId,
+					},
+					param
+				)
 			)
-		)
+			
+		} else {
+			log(chalk`[{magenta Debug:SendMessage}]: userId: ${userId}`)
+			log(chalk`[{magenta Debug:SendMessage}]: param: ${JSON.stringify(param)}`)
+			return null
+		}
 	}
 
 	/**
