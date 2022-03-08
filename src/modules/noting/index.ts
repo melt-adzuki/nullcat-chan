@@ -11,7 +11,7 @@ export default class extends Module {
 		if (config.notingEnabled === false) return {}
 
 		setInterval(() => {
-			if (Math.random() < 0.2) {
+			if (Math.random() < 0.1) {
 				this.post()
 			}
 		}, 1000 * 60 * 10)

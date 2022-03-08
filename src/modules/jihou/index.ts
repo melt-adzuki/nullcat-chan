@@ -21,11 +21,6 @@ export default class extends Module {
 		const hour = date.getHours()
 
 		switch (hour) {
-			case 7:
-				this.nullcatChan.post({
-					text: `みんなおはよ！${hour}時だよ！`,
-				})
-				break
 
 			default:
 				this.nullcatChan.post({
@@ -33,9 +28,21 @@ export default class extends Module {
 				})
 				break
 
+			case 7:
+				this.nullcatChan.post({
+					text: `みんなおはよ！${hour}時だよ！`,
+				})
+				break
+
 			case 1:
 				this.nullcatChan.post({
 					text: `${hour}時だよ！みんなそろそろ寝る時間かな？`,
+				})
+				break
+
+			case 5:
+				this.nullcatChan.post({
+					text: `${hour}時だよ！ログボリセットの時間だよ！！`,
 				})
 				break
 		}
