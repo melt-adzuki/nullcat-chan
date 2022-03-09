@@ -37,7 +37,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecab": "MeCab のインストールパス (ソースからインストールした場合、大体は /usr/local/bin/mecab) true or false",
 	"mecabDic": "MeCab の辞書ファイルパス (オプション)",
 	"memoryDir": "memory.jsonの保存先（オプション、デフォルトは'.'（レポジトリのルートです））",
-	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
 	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```
@@ -57,7 +56,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecab": "/usr/bin/mecab",
 	"mecabDic": "/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/",
 	"memoryDir": "data",
-	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
 	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```

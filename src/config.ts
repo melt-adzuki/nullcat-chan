@@ -10,7 +10,6 @@ type Config = {
 	mecab?: string;
 	mecabDic?: string;
 	memoryDir?: string;
-	weatherlocation?: string;
 	shellgeiUrl: string;
 };
 
