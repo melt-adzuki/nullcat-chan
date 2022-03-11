@@ -18,7 +18,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - やることを決めてくれる
 - 気圧の状況を教えてくれる
 - 時報機能
-- 天気機能(気象庁API)
 - シェル芸機能([ここ](https://github.com/sim1222/shellgei-misskey)から持ってきた)
 
 ## 導入方法
