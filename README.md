@@ -18,7 +18,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - やることを決めてくれる
 - 気圧の状況を教えてくれる
 - 時報機能
-- 天気機能(気象庁API)
 - シェル芸機能([ここ](https://github.com/sim1222/shellgei-misskey)から持ってきた)
 
 ## 導入方法
@@ -37,7 +36,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecab": "MeCab のインストールパス (ソースからインストールした場合、大体は /usr/local/bin/mecab) true or false",
 	"mecabDic": "MeCab の辞書ファイルパス (オプション)",
 	"memoryDir": "memory.jsonの保存先（オプション、デフォルトは'.'（レポジトリのルートです））",
-	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
 	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```
@@ -57,7 +55,6 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"mecab": "/usr/bin/mecab",
 	"mecabDic": "/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd/",
 	"memoryDir": "data",
-	"weatherlocation": "天気予報の位置 (オプション)、デフォルトは東京都中央区です",
 	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }
 ```

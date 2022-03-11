@@ -25,7 +25,6 @@ import TalkModule from "./modules/talk"
 import TimerModule from "./modules/timer"
 import TraceMoeModule from "./modules/trace-moe"
 import ValentineModule from "./modules/valentine"
-import WeatherModule from "./modules/weather"
 import WhatModule from "./modules/what"
 import YarukotoModule from "./modules/yarukoto"
 import NullcatChan from "./nullcat-chan"
@@ -95,7 +94,6 @@ promiseRetry(
 			new WhatModule(),
 			new FeelingModule(),
 			new TraceMoeModule(),
-			new WeatherModule(),
 			new ServerModule(),
 			new ShellGeiModule(),
 		])
