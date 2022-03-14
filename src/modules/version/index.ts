@@ -46,7 +46,7 @@ export default class extends Module {
 
 					this.log(`Version changed: ${v}`);
 
-					this.nullcatChan.post({ text: `【バージョンが変わりました】\n${v}` });
+					this.nullcatChan.post({ text: `【ぼくのおうちが${v}にリフォームされたよ！！】` });
 				} else {
 					// 変更なし
 				}
@@ -60,14 +60,14 @@ export default class extends Module {
 	private async mentionHook(msg: Message) {
 		if (msg.text == null) return false;
 
-		const query = msg.text.match(/バージョン/);
+		const query = msg.text.match(/サーバーバージョン/);
 
 		if (query == null) return false;
 
 		this.nullcatChan.api('meta').then(meta => {
-			msg.reply(`${this.mfmVersion(meta.version)} みたいです。`)
+			msg.reply(`${this.mfmVersion(meta.version)} みたいだよ！`)
 		}).catch(() => {
-			msg.reply(`取得失敗しました`)
+			msg.reply(`取得失敗しちゃった:cry_nullcat:`)
 		});
 
 		return true;
