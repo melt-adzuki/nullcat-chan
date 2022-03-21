@@ -8,7 +8,7 @@ import Message from '../../message';
  */
 interface Version {
 	/**
-	 * サーバーバージョン(meta.version)
+	 * サーバーバージョン(meta.Sversion)
 	 */
 	server: string;
 	/**
@@ -25,7 +25,7 @@ export default class extends Module {
 	@autobind
 	public install() {
 		this.versionCheck();
-		setInterval(this.versionCheck, 60 * 1000);
+		setInterval(this.versionCheck, 1000 * 60 * 60 * 12);
 
 		return {
 			mentionHook: this.mentionHook
@@ -46,7 +46,7 @@ export default class extends Module {
 
 					this.log(`Version changed: ${v}`);
 
-					this.nullcatChan.post({ text: `【ぼくのおうちが${v}にリフォームされたよ！！】` });
+					this.nullcatChan.post({ text: `ぼくのおうちが${v}にリフォームされたよ！！` });
 				} else {
 					// 変更なし
 				}
