@@ -29,8 +29,9 @@ import WhatModule from "./modules/what"
 import YarukotoModule from "./modules/yarukoto"
 import NullcatChan from "./nullcat-chan"
 import _log from "./utils/log"
-import ShellGeiModule from './modules/shellgei';
-import VersionModule from "./modules/version"
+import ShellGeiModule from "./modules/shellgei"
+import SversionModule from "./modules/Sversion"
+import NversionModule from "./modules/Nversion"
 
 const promiseRetry = require("promise-retry")
 
@@ -97,7 +98,8 @@ promiseRetry(
 			new TraceMoeModule(),
 			new ServerModule(),
 			new ShellGeiModule(),
-			new VersionModule(),
+			new SversionModule(),
+			new NversionModule(),
 		])
 	})
 	.catch((e) => {
