@@ -15,6 +15,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 - ゴママヨに反応([ここ](https://github.com/ThinaticSystem/gomamayo.js)から持ってきた)
 - ゲーム機能と絵文字を自動生成するやつがない
 - GitHubのStatusがわかる
+- CloudflareのStatusがわかる
 - やることを決めてくれる
 - 気圧の状況を教えてくれる
 - 時報機能
