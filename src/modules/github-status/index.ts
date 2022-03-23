@@ -61,7 +61,7 @@ export default class extends Module {
 			case "major":
 			case "critical":
 				this.nullcatChan.post({
-					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`,
+					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com/`,
 				})
 
 				this.log("Report posted.")
@@ -75,7 +75,7 @@ export default class extends Module {
 	@autobind
 	private async mentionHook(msg: Message) {
 		if (msg.text?.toLowerCase().includes("github")) {
-			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}`, {
+			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com`, {
 				immediate: true,
 			})
 			return true
