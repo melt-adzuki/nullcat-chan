@@ -20,13 +20,11 @@ export default class extends Module {
 
 	@autobind
 	public install() {
-		if (config.serverMonitoring) {
-			setInterval(this.updateStatus, 10 * 60 * 1000)
-			setInterval(this.postStatus, 60 * 60 * 1000)
+		setInterval(this.updateStatus, 10 * 60 * 1000)
+		setInterval(this.postStatus, 60 * 60 * 1000)
 
-			this.updateStatus()
-			this.postStatus()
-		}
+		this.updateStatus()
+		this.postStatus()
 
 		return {
 			mentionHook: this.mentionHook,
@@ -75,9 +73,7 @@ export default class extends Module {
 	@autobind
 	private async mentionHook(msg: Message) {
 		if (msg.text?.toLowerCase().includes("github")) {
-			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com`, {
-				immediate: true,
-			})
+			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com`)
 			return true
 		} else {
 			return false

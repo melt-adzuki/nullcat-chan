@@ -11,6 +11,7 @@ import FeelingModule from "./modules/feeling"
 import FollowModule from "./modules/follow"
 import FortuneModule from "./modules/fortune"
 import GitHubStatusModule from "./modules/github-status"
+import CloudflareStatus from "./modules/cloudflare-status";
 import GomamayoModule from "./modules/gomamayo"
 import JihouModule from "./modules/jihou"
 import KeywordModule from "./modules/keyword"
@@ -88,6 +89,7 @@ promiseRetry(
 			new ReminderModule(),
 			new GomamayoModule(),
 			new GitHubStatusModule(),
+			new CloudflareStatus(),
 			new YarukotoModule(),
 			new RoguboModule(),
 			new KiatsuModule(),
