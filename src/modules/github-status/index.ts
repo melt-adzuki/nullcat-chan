@@ -11,9 +11,17 @@ export default class extends Module {
 	private readonly schema = z.object({
 		status: z.object({
 			description: z.string(),
-			indicator: z.enum(["none", "minor", "major", "critical"]),
+			indicator: z.enum(["none", "minor", "major", "critical", "maintenance"]),
 		}),
 	})
+
+	private indicatorString: Record<z.infer<typeof this.schema>["status"]["indicator"], string> = {
+		"none": "今はGitHubなんともないみたい！！",
+		"minor": "GitHubにちょっとしたエラーが起きてるかも",
+		"major": "GitHubにエラーが起きてるみたい",
+		"critical": "GitHubに重大なエラーが起きてるみたい",
+		"maintenance": "GitHubがメンテナンス中みたい",
+	}
 
 	private indicator: z.infer<typeof this.schema>["status"]["indicator"] = "none"
 	private description: z.infer<typeof this.schema>["status"]["description"] = ""
@@ -59,7 +67,7 @@ export default class extends Module {
 			case "major":
 			case "critical":
 				this.nullcatChan.post({
-					text: `GitHub重いかもしれにゃい...\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com/`,
+					text: `${this.indicatorString[this.indicator]}\nせつめい: ${this.description}\nhttps://www.githubstatus.com/`,
 				})
 
 				this.log("Report posted.")
@@ -73,7 +81,7 @@ export default class extends Module {
 	@autobind
 	private async mentionHook(msg: Message) {
 		if (msg.text?.toLowerCase().includes("github")) {
-			msg.reply(`いまのGitHubのステータスだよ！\n\nじょうきょう: ${this.indicator}\nせつめい: ${this.description}\nhttps://www.githubstatus.com`)
+			msg.reply(`${this.indicatorString[this.indicator]}\nせつめい: ${this.description}\nhttps://www.githubstatus.com`)
 			return true
 		} else {
 			return false
