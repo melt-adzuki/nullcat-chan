@@ -2,6 +2,7 @@ import config from "@/config"
 import Message from "@/message"
 import Module from "@/module"
 import serifs from "@/serifs"
+import NGWord from "@/ng-words";
 import autobind from "autobind-decorator"
 import * as loki from "lokijs"
 import { mecab } from "./mecab"
@@ -20,6 +21,8 @@ export default class extends Module {
 		keyword: string
 		learnedAt: number
 	}>
+
+	private ngWord = new NGWord()
 
 	@autobind
 	public install() {
@@ -70,6 +73,9 @@ export default class extends Module {
 				keyword: keyword[0],
 				learnedAt: Date.now(),
 			})
+
+			const isNGWord = this.ngWord.get.some(word => keyword[0] === word)
+			if (isNGWord) return
 
 			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]))
 		}
