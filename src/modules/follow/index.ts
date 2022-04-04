@@ -21,11 +21,11 @@ export default class extends Module {
 				})
 				msg.reply("これからよろしくね！", { immediate: true })
 				return {
-					reaction: msg.friend.love >= 0 ? ":love_nullcat:" : null,
+					reaction: msg.friend.love >= 0 ? ":love_nullcatchan:" : null,
 				}
 			} else {
 				return {
-					reaction: msg.friend.love >= 0 ? ":love_nullcat:" : null,
+					reaction: msg.friend.love >= 0 ? ":love_nullcatchan:" : null,
 				}
 			}
 		} else {

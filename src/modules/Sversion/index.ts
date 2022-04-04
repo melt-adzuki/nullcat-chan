@@ -67,7 +67,7 @@ export default class extends Module {
 		this.nullcatChan.api('meta').then(meta => {
 			msg.reply(`${this.mfmVersion(meta.version)} みたいだよ！`)
 		}).catch(() => {
-			msg.reply(`取得失敗しちゃった:cry_nullcat:`)
+			msg.reply(`取得失敗しちゃった:cry_nullcatchan:`)
 		});
 
 		return true;
