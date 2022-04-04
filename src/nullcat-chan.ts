@@ -167,7 +167,7 @@ export default class NullcatChan {
 			// リアクションする
 			this.api("notes/reactions/create", {
 				noteId: data.id,
-				reaction: ":love_nullcat:",
+				reaction: ":love_nullcatchan:",
 			})
 		})
 
@@ -236,7 +236,7 @@ export default class NullcatChan {
 						  }
 			  )
 
-		let reaction: string | null = ":love_nullcat:"
+		let reaction: string | null = ":love_nullcatchan:"
 		let immediate: boolean = false
 
 		//#region
