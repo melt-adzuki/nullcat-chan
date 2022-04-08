@@ -11,7 +11,9 @@ export default class extends Module {
 	private readonly itemSchema = z.object({
 		anilist: z.object({
 			title: z.object({
-				native: z.string(),
+				native: z.string().nullable(),
+				romaji: z.string().nullable(),
+				english: z.string().nullable(),
 			}),
 			isAdult: z.boolean(),
 		}),
@@ -98,6 +100,13 @@ export default class extends Module {
 			return true
 		}
 
+		const animeTitle = traceMoe.anilist.title.native || traceMoe.anilist.title.english
+		
+		if (!animeTitle) {
+			message.reply("ごめんね、わかんないや…")
+			return true
+		}
+		
 		if (typeof traceMoe.episode === "string") traceMoe.episode = traceMoe.episode.replace(/\|/g, "か")
 		else if (Array.isArray(traceMoe.episode)) traceMoe.episode = traceMoe.episode.join("話と")
 
@@ -126,7 +135,6 @@ export default class extends Module {
 
 		const time = fromText && toText && fromText === toText ? fromText : `${fromText}から${toText}`
 
-		const animeTitle = traceMoe.anilist.title.native
 
 		const detail = (() => {
 			if (traceMoe.episode && traceMoe.from && traceMoe.to) return `第${traceMoe.episode}話の${time}`
