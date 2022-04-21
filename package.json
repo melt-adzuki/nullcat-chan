@@ -1,5 +1,5 @@
 {
-	"_v": "2.1.0",
+	"version": "2.1.0",
 	"main": "./built/index.js",
 	"scripts": {
 		"docker:dev": "cross-env DOCKER_ENV=development docker-compose -f docker-compose.yml -f docker-compose_development.yml up -d --build && docker-compose logs -f",

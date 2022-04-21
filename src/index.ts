@@ -33,6 +33,7 @@ import _log from "./utils/log"
 import ShellGeiModule from "./modules/shellgei"
 import SversionModule from "./modules/Sversion"
 import AyashiiModule from "./modules/ayashii"
+import NversionModule from "./modules/Nversion"
 
 const promiseRetry = require("promise-retry")
 
@@ -102,6 +103,7 @@ promiseRetry(
 			new ShellGeiModule(),
 			new SversionModule(),
 			new AyashiiModule(),
+			new NversionModule(),
 		])
 	})
 	.catch((e) => {
