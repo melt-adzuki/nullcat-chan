@@ -32,7 +32,7 @@ import NullcatChan from "./nullcat-chan"
 import _log from "./utils/log"
 import ShellGeiModule from "./modules/shellgei"
 import SversionModule from "./modules/Sversion"
-import AyasiiModule from "./modules/ayashii"
+import AyashiiModule from "./modules/ayashii"
 
 const promiseRetry = require("promise-retry")
 
@@ -101,7 +101,7 @@ promiseRetry(
 			new ServerModule(),
 			new ShellGeiModule(),
 			new SversionModule(),
-			new AyasiiModule(),
+			new AyashiiModule(),
 		])
 	})
 	.catch((e) => {
