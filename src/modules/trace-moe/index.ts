@@ -15,7 +15,7 @@ export default class extends Module {
 				romaji: z.string().nullable(),
 				english: z.string().nullable(),
 			}),
-			isAdult: z.boolean(),
+			isAdult: z.boolean().nullable(),
 		}),
 		episode: z.number().or(z.string()).or(z.array(z.number())).nullable(),
 		from: z.number().nullable(),
