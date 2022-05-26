@@ -37,7 +37,7 @@ export default class extends Module {
 		}
 
 		if (await gomamayo.find(note.text)) return react(":bikkuribikkuri_:")
-		if (includes(note.text, ["ぬるきゃっとちゃん", "Nullcat chan", "ぬるきゃっとぼっと"])) return react(":bibibi_nullcatchan:")
+		if (includes(note.text, ["ぬるきゃっとちゃん", "Nullcat chan", "Nullcatchan", "ぬるきゃぼっと", "ぬるきゃっとぼっと"])) return react(":bibibi_nullcatchan:")
 		if (
 			includes(note.text, [
 				"ねむい",
