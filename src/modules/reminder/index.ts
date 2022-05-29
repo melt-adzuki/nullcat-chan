@@ -45,9 +45,13 @@ export default class extends Module {
 			})
 
 			const getQuoteLink = (id) => `[${id}](${config.host}/notes/${id})`
-
-			msg.reply(serifs.reminder.reminds + "\n" + reminds.map((remind) => `・${remind.thing ? remind.thing : getQuoteLink(remind.quoteId)}`).join("\n"))
-			return true
+			if(reminds.length === 0) {
+				msg.reply(serifs.reminder.none)
+			}
+			else {
+				msg.reply(serifs.reminder.reminds + "\n" + reminds.map((remind) => `・${remind.thing ? remind.thing : getQuoteLink(remind.quoteId)}`).join("\n"))
+			}
+				return true
 		}
 
 		if (text.match(/^(.+?)\s(.+)/)) {

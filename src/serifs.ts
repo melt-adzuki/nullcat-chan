@@ -206,6 +206,7 @@ export default {
 		invalid: 'うむむ？',
 
 		reminds: 'やること一覧だよ！',
+		none: 'やることはないよ！',
 
 		notify: (name) => name ? `${name}これやった？` : `これやった？`,
 
