@@ -41,7 +41,7 @@ export default class extends Module {
 	@autobind
 	public install() {
 		setInterval(this.update, 10 * 60 * 1000)
-		setInterval(this.post, 60 * 60 * 1000)
+		setInterval(this.post, 12 * 60 * 60 * 1000)
 
 		this.update()
 
