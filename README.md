@@ -36,7 +36,7 @@ Misskey用の[Aiベース](https://github.com/syuilo/ai)のBotです。
 	"keywordEnabled": "キーワードを覚える機能 (MeCab が必要) true or false",
 	"serverMonitoring": "サーバー監視の機能（重かったりすると教えてくれるよ。）true or false",
 	"mecab": "MeCab のインストールパス (ソースからインストールした場合、大体は /usr/local/bin/mecab) true or false",
-	"mecabDic": "MeCab の辞書ファイルパス (オプション)",
+	"mecabDic": "MeCab の辞書ファイルパス",
 	"memoryDir": "memory.jsonの保存先（オプション、デフォルトは'.'（レポジトリのルートです））",
 	"shellgeiUrl": "シェル芸BotのAPIのURLです（デフォルトではhttps://websh.jiro4989.com/api/shellgei）"
 }

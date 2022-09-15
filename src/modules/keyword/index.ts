@@ -92,7 +92,7 @@ export default class extends Module {
 			msg.reply("がんばってみるね")
 			this.learn()
 			return {
-				reaction: "like",
+				reaction: ":bikkuri_nullcatchan:",
 			}
 		} else {
 			return false

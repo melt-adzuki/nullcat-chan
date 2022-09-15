@@ -138,10 +138,10 @@ export default class extends Module {
 			this.unsubscribeReply(key)
 		}
 
-		if (msg.text.includes("はい")) {
-			msg.friend.updateName(data.name + "さん")
+		if (msg.text.includes("うん")) {
+			msg.friend.updateName(data.name + "ちゃん")
 			done()
-		} else if (msg.text.includes("いいえ")) {
+		} else if (msg.text.includes("ううん")) {
 			msg.friend.updateName(data.name)
 			done()
 		} else {

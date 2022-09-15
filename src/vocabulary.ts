@@ -96,6 +96,7 @@ export const items = [
 	'ぬいぐるみ',
 	'おふとん',
 	'森羅万象',
+	'めがね',
 ];
 
 export const and = [

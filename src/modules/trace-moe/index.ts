@@ -96,7 +96,7 @@ export default class extends Module {
 		const traceMoe = await this.getFromTraceMoe(imageUrl)
 
 		if (!traceMoe) {
-			message.reply("みゃ～～～、いまはめんどくさいかも…")
+			message.reply("ぬぁ～～～、いまはめんどくさいかも…")
 			return true
 		}
 

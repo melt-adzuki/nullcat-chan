@@ -6,7 +6,7 @@ export default {
 
 		san: 'さん付けした方がいいかな？',
 
-		yesOrNo: '僕「はい」か「いいえ」しかわからないんだ...',
+		yesOrNo: 'ごめんね...僕「うん」か「いいえ」しかわからないんだ...',
 
 		hello: name => name ? `やっほぉ${name}` : `やっほぉ！`,
 
@@ -61,7 +61,7 @@ export default {
 				'おかえりぃ～'
 			],
 
-			love2: name => name ? `にゃぁ～♡♡おかえり♡♡♡${name}今日も偉いね♡♡♡` : 'にゃぁ～♡♡おかえり♡♡♡今日も偉いね♡♡♡',
+			love2: name => name ? `おかえり～～！！${name}今日も偉いね:love_nullcatchan:` : 'おかえり～～！！今日も偉いね:love_nullcatchan:',
 
 			normal: name => name ? `おかえり${name}！` : 'おかえり！',
 		},
@@ -81,7 +81,7 @@ export default {
 
 			love2: ['あぅ… 恥ずかしいよぉ', 'あぅ… 恥ずかしぃ…', 'ふみゃ…！？'],
 
-			love3: ['んへへぇ♡ ありがと♡♡♡', 'にへぇ～～', 'んみゅっ… ', 'もっともっとぉ...'],
+			love3: ['んへへぇ ありがと:love_nullcatchan:', 'にへぇ～～', 'んみゅっ… ', 'もっともっとぉ...'],
 
 			hate1: 'やめて',
 
@@ -113,7 +113,7 @@ export default {
 
 			love: 'ぎゅーっ♪',
 
-			hate: '離れてください...'
+			hate: '無理...やめて...'
 		},
 
 		humu: {
