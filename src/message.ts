@@ -1,7 +1,7 @@
 import config from "@/config"
 import Friend from "@/friend"
 import { User } from "@/misskey/user"
-import NullcatChan from "@/nullcat-chan"
+import 藍 from "@/ai"
 import includes from "@/utils/includes"
 import or from "@/utils/or"
 import autobind from "autobind-decorator"
@@ -31,7 +31,7 @@ interface MisskeyFile {
 }
 
 export default class Message {
-	private nullcatChan: NullcatChan
+	private ai: 藍
 	private messageOrNote: any
 	public isDm: boolean
 
@@ -68,8 +68,8 @@ export default class Message {
 	public get extractedText(): string {
 		const host = new URL(config.host).host.replace(/\./g, "\\.")
 		return this.text
-			.replace(new RegExp(`^@${this.nullcatChan.account.username}@${host}\\s`, "i"), "")
-			.replace(new RegExp(`^@${this.nullcatChan.account.username}\\s`, "i"), "")
+			.replace(new RegExp(`^@${this.ai.account.username}@${host}\\s`, "i"), "")
+			.replace(new RegExp(`^@${this.ai.account.username}\\s`, "i"), "")
 			.trim()
 	}
 
@@ -79,15 +79,15 @@ export default class Message {
 
 	public friend: Friend
 
-	constructor(nullcatChan: NullcatChan, messageOrNote: any, isDm: boolean) {
-		this.nullcatChan = nullcatChan
+	constructor(ai: 藍, messageOrNote: any, isDm: boolean) {
+		this.ai = ai
 		this.messageOrNote = messageOrNote
 		this.isDm = isDm
 
-		this.friend = new Friend(nullcatChan, { user: this.user })
+		this.friend = new Friend(ai, { user: this.user })
 
 		// メッセージなどに付いているユーザー情報は省略されている場合があるので完全なユーザー情報を持ってくる
-		this.nullcatChan
+		this.ai
 			.api("users/show", {
 				userId: this.userId,
 			})
@@ -108,19 +108,19 @@ export default class Message {
 	) {
 		if (text == null) return
 
-		this.nullcatChan.log(`>>> Sending reply to ${chalk.underline(this.id)}`)
+		this.ai.log(`>>> Sending reply to ${chalk.underline(this.id)}`)
 
 		if (!opts?.immediate) {
 			await delay(2000)
 		}
 
 		if (this.isDm) {
-			return await this.nullcatChan.sendMessage(this.messageOrNote.userId, {
+			return await this.ai.sendMessage(this.messageOrNote.userId, {
 				text: text,
 				fileId: opts?.file?.id,
 			})
 		} else {
-			return await this.nullcatChan.post({
+			return await this.ai.post({
 				replyId: this.messageOrNote.id,
 				text: text,
 				fileIds: opts?.file ? [opts?.file.id] : undefined,

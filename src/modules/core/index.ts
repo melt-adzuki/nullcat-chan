@@ -104,7 +104,7 @@ export default class extends Module {
 
 		let text = "```\n"
 
-		for (const m of this.nullcatChan.modules) {
+		for (const m of this.ai.modules) {
 			text += `${m.name}\n`
 		}
 
@@ -122,7 +122,7 @@ export default class extends Module {
 		if (!msg.text) return false
 		if (!msg.or(["v", "version", "バージョン"])) return false
 
-		msg.reply(`\`\`\`\nv${this.nullcatChan.version}\n\`\`\``, {
+		msg.reply(`\`\`\`\nv${this.ai.version}\n\`\`\``, {
 			immediate: true,
 		})
 

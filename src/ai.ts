@@ -1,4 +1,4 @@
-// NULLCAT-CHAN CORE
+// AI CORE
 
 import config from "@/config"
 import Friend, { FriendDoc } from "@/friend"
@@ -37,9 +37,9 @@ export type Meta = {
 }
 
 /**
- * ぬるきゃっとちゃん
+ * 藍
  */
-export default class NullcatChan {
+export default class 藍 {
 	public readonly version = pkg._v
 	public account: User
 	public connection: Stream
@@ -73,8 +73,8 @@ export default class NullcatChan {
 	public moduleData: loki.Collection<any>
 
 	/**
-	 * ぬるきゃっとちゃんのインスタンスを生成します
-	 * @param account ぬるきゃっとちゃんを遣うアカウント
+	 * 藍インスタンスを生成します
+	 * @param account 藍として使うアカウント
 	 * @param modules モジュール。先頭のモジュールほど高優先度
 	 */
 	constructor(account: User, modules: Module[]) {

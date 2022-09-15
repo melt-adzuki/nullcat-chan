@@ -1,6 +1,6 @@
 import { User } from "@/misskey/user"
 import IModule from "@/module"
-import NullcatChan from "@/nullcat-chan"
+import 藍 from "@/ai"
 import getDate from "@/utils/get-date"
 import { genItem } from "@/vocabulary"
 import autobind from "autobind-decorator"
@@ -18,7 +18,7 @@ export type FriendDoc = {
 }
 
 export default class Friend {
-	private nullcatChan: NullcatChan
+	private ai: 藍
 
 	public get userId() {
 		return this.doc.userId
@@ -38,16 +38,16 @@ export default class Friend {
 
 	public doc: FriendDoc
 
-	constructor(nullcatChan: NullcatChan, opts: { user?: User; doc?: FriendDoc }) {
-		this.nullcatChan = nullcatChan
+	constructor(ai: 藍, opts: { user?: User; doc?: FriendDoc }) {
+		this.ai = ai
 
 		if (opts.user) {
-			const exist = this.nullcatChan.friends.findOne({
+			const exist = this.ai.friends.findOne({
 				userId: opts.user.id,
 			})
 
 			if (exist == null) {
-				const inserted = this.nullcatChan.friends.insertOne({
+				const inserted = this.ai.friends.insertOne({
 					userId: opts.user.id,
 					user: opts.user,
 				})
@@ -124,7 +124,7 @@ export default class Friend {
 		this.doc.todayLoveIncrements = (this.doc.todayLoveIncrements || 0) + amount
 		this.save()
 
-		this.nullcatChan.log(`💗 ${this.userId} +${amount}`)
+		this.ai.log(`💗 ${this.userId} +${amount}`)
 	}
 
 	@autobind
@@ -145,7 +145,7 @@ export default class Friend {
 
 		this.save()
 
-		this.nullcatChan.log(`💢 ${this.userId} -${amount}`)
+		this.ai.log(`💢 ${this.userId} -${amount}`)
 	}
 
 	@autobind
@@ -156,7 +156,7 @@ export default class Friend {
 
 	@autobind
 	public save() {
-		this.nullcatChan.friends.update(this.doc)
+		this.ai.friends.update(this.doc)
 	}
 
 	@autobind
@@ -171,7 +171,7 @@ export default class Friend {
 
 	@autobind
 	public transferMemory(code: string): boolean {
-		const src = this.nullcatChan.friends.findOne({
+		const src = this.ai.friends.findOne({
 			transferCode: code,
 		})
 

@@ -1,6 +1,6 @@
 import Message from "@/message"
 import Module from "@/module"
-import { HandlerResult } from "@/nullcat-chan"
+import { HandlerResult } from "@/ai"
 import serifs, { getSerif } from "@/serifs"
 import getDate from "@/utils/get-date"
 import autobind from "autobind-decorator"
@@ -216,7 +216,7 @@ export default class extends Module {
 		// これは、「ハグ」と言って「ぎゅー」と返信したとき、相手が
 		// それに対してさらに「ぎゅー」と返信するケースがあったため。
 		// そうするとその「ぎゅー」に対してもマッチするため、また
-		// ぬるきゃっとちゃんがそれに返信してしまうことになり、少し不自然になる。
+		// 藍がそれに返信してしまうことになり、少し不自然になる。
 		// これを防ぐために前にハグしてから少し時間が経っていないと
 		// 返信しないようにする
 		const now = Date.now()

@@ -46,7 +46,7 @@ export default class extends Module {
 
 					this.log(`Version changed: ${v}`);
 
-					this.nullcatChan.post({ text: `ぼくのおうちが${v}にリフォームされたよ！！` });
+					this.ai.post({ text: `ぼくのおうちが${v}にリフォームされたよ！！` });
 				} else {
 					// 変更なし
 				}
@@ -64,7 +64,7 @@ export default class extends Module {
 
 		if (query == null) return false;
 
-		this.nullcatChan.api('meta').then(meta => {
+		this.ai.api('meta').then(meta => {
 			msg.reply(`${this.mfmVersion(meta.version)} みたいだよ！`)
 		}).catch(() => {
 			msg.reply(`取得失敗しちゃった:cry_nullcatchan:`)
@@ -77,7 +77,7 @@ export default class extends Module {
 	 * バージョンを取得する
 	 */
 	private getVersion = (): Promise<Version> => {
-		return this.nullcatChan.api('meta').then(meta => {
+		return this.ai.api('meta').then(meta => {
 			return {
 				server: meta.version,
 				client: meta.clientVersion

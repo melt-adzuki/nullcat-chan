@@ -55,15 +55,15 @@ export default class extends Module {
 
 	@autobind
 	private timeoutCallback(data) {
-		const friend = this.nullcatChan.lookupFriend(data.userId)
+		const friend = this.ai.lookupFriend(data.userId)
 		if (friend == null) return // 処理の流れ上、実際にnullになることは無さそうだけど一応
 		const text = serifs.timer.notify(data.time, friend.name)
 		if (data.isDm) {
-			this.nullcatChan.sendMessage(friend.userId, {
+			this.ai.sendMessage(friend.userId, {
 				text: text,
 			})
 		} else {
-			this.nullcatChan.post({
+			this.ai.post({
 				replyId: data.msgId,
 				text: text,
 			})

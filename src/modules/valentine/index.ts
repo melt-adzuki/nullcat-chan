@@ -26,10 +26,10 @@ export default class extends Module {
 
 		const date = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`
 
-		const friends = this.nullcatChan.friends.find({} as any)
+		const friends = this.ai.friends.find({} as any)
 
 		friends.forEach((f) => {
-			const friend = new Friend(this.nullcatChan, { doc: f })
+			const friend = new Friend(this.ai, { doc: f })
 
 			// 親愛度が7以上必要
 			if (friend.love < 7) return
@@ -43,7 +43,7 @@ export default class extends Module {
 
 			const text = serifs.valentine.chocolateForYou(friend.name)
 
-			this.nullcatChan.sendMessage(friend.userId, {
+			this.ai.sendMessage(friend.userId, {
 				text: text,
 			})
 		})

@@ -28,7 +28,7 @@ export default class extends Module {
 	public install() {
 		if (!config.keywordEnabled) return {}
 
-		this.learnedKeywords = this.nullcatChan.getCollection("_keyword_learnedKeywords", {
+		this.learnedKeywords = this.ai.getCollection("_keyword_learnedKeywords", {
 			indices: ["userId"],
 		})
 
@@ -41,11 +41,11 @@ export default class extends Module {
 
 	@autobind
 	private async learn() {
-		const tl = await this.nullcatChan.api("notes/hybrid-timeline", {
+		const tl = await this.ai.api("notes/hybrid-timeline", {
 			limit: 30,
 		})
 
-		const interestedNotes = tl.filter((note) => note.userId !== this.nullcatChan.account.id && note.text != null && note.cw == null)
+		const interestedNotes = tl.filter((note) => note.userId !== this.ai.account.id && note.text != null && note.cw == null)
 
 		let keywords: string[][] = []
 
@@ -80,7 +80,7 @@ export default class extends Module {
 			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]))
 		}
 
-		this.nullcatChan.post({
+		this.ai.post({
 			text: text,
 		})
 	}

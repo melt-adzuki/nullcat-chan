@@ -66,7 +66,7 @@ export default class extends Module {
 			case "minor":
 			case "major":
 			case "critical":
-				this.nullcatChan.post({
+				this.ai.post({
 					text: `${this.indicatorString[this.indicator]}\nせつめい: ${this.description}\nhttps://www.githubstatus.com/`,
 				})
 

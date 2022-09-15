@@ -33,7 +33,7 @@ export default class extends Module {
 		this.setData(data)
 
 		setTimeout(() => {
-			this.nullcatChan.post({
+			this.ai.post({
 				text: serifs.rogubo,
 			})
 		}, 1000 * 60 * 60 * Math.random())

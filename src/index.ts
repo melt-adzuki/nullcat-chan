@@ -1,4 +1,4 @@
-// Nullcat chan! bootstrapper
+// AiOS bootstrapper
 
 import * as chalk from "chalk"
 import "module-alias/register"
@@ -28,7 +28,7 @@ import TraceMoeModule from "./modules/trace-moe"
 import ValentineModule from "./modules/valentine"
 import WhatModule from "./modules/what"
 import YarukotoModule from "./modules/yarukoto"
-import NullcatChan from "./nullcat-chan"
+import 藍 from "./ai"
 import _log from "./utils/log"
 import ShellGeiModule from "./modules/shellgei"
 import SversionModule from "./modules/Sversion"
@@ -73,8 +73,8 @@ promiseRetry(
 
 		log("Starting Nullcat chan...")
 
-		// ぬるきゃっとちゃん起動
-		new NullcatChan(account, [
+		// 藍起動
+		new 藍(account, [
 			new CoreModule(),
 			new EmojiReactModule(),
 			new FortuneModule(),
