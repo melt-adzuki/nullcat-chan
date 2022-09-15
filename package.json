@@ -6,6 +6,7 @@
 		"docker": "cross-env DOCKER_ENV=production docker-compose up -d --build && docker-compose logs -f",
 		"dev": "cross-env NODE_ENV=development node ./built",
 		"start": "cross-env NODE_ENV=production node ./built",
+		"lint": "prettier --write ./src/",
 		"build": "tsc",
 		"test": "jest"
 	},
