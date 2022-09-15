@@ -18,7 +18,7 @@ interface Version {
 }
 
 export default class extends Module {
-	public readonly name = 'Sversion';
+	public readonly name = 'version';
 
 	private latest?: Version;
 

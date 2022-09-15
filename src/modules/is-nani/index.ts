@@ -3,7 +3,7 @@ import Module from '@/module';
 import autobind from 'autobind-decorator';
 
 export default class extends Module {
-	public readonly name = 'what';
+	public readonly name = 'is-nani';
 
 	@autobind
 	public install() {

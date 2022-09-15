@@ -35,10 +35,10 @@ import JihouModule from './modules/jihou';
 import KiatsuModule from './modules/kiatsu';
 import RoguboModule from './modules/rogubo';
 import TraceMoeModule from './modules/trace-moe';
-import WhatModule from './modules/what';
+import IsNaniModule from './modules/is-nani';
 import YarukotoModule from './modules/yarukoto';
 import ShellGeiModule from './modules/shellgei';
-import SversionModule from './modules/Sversion';
+import VersionModule from './modules/version';
 import AyashiiModule from './modules/ayashii';
 
 console.log('    _   __      ____           __  ________                __     ');
@@ -99,11 +99,11 @@ promiseRetry(
 			new RoguboModule(),
 			new KiatsuModule(),
 			new JihouModule(),
-			new WhatModule(),
+			new IsNaniModule(),
 			new FeelingModule(),
 			new TraceMoeModule(),
 			new ShellGeiModule(),
-			new SversionModule(),
+			new VersionModule(),
 			new AyashiiModule()
 		]);
 	})
