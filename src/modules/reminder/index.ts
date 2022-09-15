@@ -44,11 +44,11 @@ export default class extends Module {
 				userId: msg.userId
 			});
 
-			const getQuoteLink = (id) => `[${id}](${config.host}/notes/${id})`;
+			const getQuoteLink = id => `[${id}](${config.host}/notes/${id})`;
 			if (reminds.length === 0) {
 				msg.reply(serifs.reminder.none);
 			} else {
-				msg.reply(serifs.reminder.reminds + '\n' + reminds.map((remind) => `・${remind.thing ? remind.thing : getQuoteLink(remind.quoteId)}`).join('\n'));
+				msg.reply(serifs.reminder.reminds + '\n' + reminds.map(remind => `・${remind.thing ? remind.thing : getQuoteLink(remind.quoteId)}`).join('\n'));
 			}
 			return true;
 		}

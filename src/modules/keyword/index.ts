@@ -8,7 +8,7 @@ import serifs from '@/serifs';
 import { mecab } from './mecab';
 
 function kanaToHira(str: string) {
-	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
+	return str.replace(/[\u30a1-\u30f6]/g, match => {
 		const chr = match.charCodeAt(0) - 0x60;
 		return String.fromCharCode(chr);
 	});
@@ -45,13 +45,13 @@ export default class extends Module {
 			limit: 30
 		});
 
-		const interestedNotes = tl.filter((note) => note.userId !== this.ai.account.id && note.text != null && note.cw == null);
+		const interestedNotes = tl.filter(note => note.userId !== this.ai.account.id && note.text != null && note.cw == null);
 
 		let keywords: string[][] = [];
 
 		for (const note of interestedNotes) {
 			const tokens = await mecab(note.text, config.mecab, config.mecabDic);
-			const keywordsInThisNote = tokens.filter((token) => token[2] == '固有名詞' && token[8] != null);
+			const keywordsInThisNote = tokens.filter(token => token[2] == '固有名詞' && token[8] != null);
 			keywords = keywords.concat(keywordsInThisNote);
 		}
 
@@ -74,7 +74,7 @@ export default class extends Module {
 				learnedAt: Date.now()
 			});
 
-			const isNGWord = this.ngWord.get.some((word) => keyword[0] === word);
+			const isNGWord = this.ngWord.get.some(word => keyword[0] === word);
 			if (isNGWord) return;
 
 			text = serifs.keyword.learned(keyword[0], kanaToHira(keyword[8]));

@@ -31,7 +31,7 @@ export default class Stream extends EventEmitter {
 
 	@autobind
 	public useSharedConnection(channel: string): SharedConnection {
-		let pool = this.sharedConnectionPools.find((p) => p.channel === channel);
+		let pool = this.sharedConnectionPools.find(p => p.channel === channel);
 
 		if (pool == null) {
 			pool = new Pool(this, channel);
@@ -45,7 +45,7 @@ export default class Stream extends EventEmitter {
 
 	@autobind
 	public removeSharedConnection(connection: SharedConnection) {
-		this.sharedConnections = this.sharedConnections.filter((c) => c !== connection);
+		this.sharedConnections = this.sharedConnections.filter(c => c !== connection);
 	}
 
 	@autobind
@@ -57,7 +57,7 @@ export default class Stream extends EventEmitter {
 
 	@autobind
 	public disconnectToChannel(connection: NonSharedConnection) {
-		this.nonSharedConnections = this.nonSharedConnections.filter((c) => c !== connection);
+		this.nonSharedConnections = this.nonSharedConnections.filter(c => c !== connection);
 	}
 
 	/**
@@ -79,10 +79,10 @@ export default class Stream extends EventEmitter {
 
 		// チャンネル再接続
 		if (isReconnect) {
-			this.sharedConnectionPools.forEach((p) => {
+			this.sharedConnectionPools.forEach(p => {
 				p.connect();
 			});
-			this.nonSharedConnections.forEach((c) => {
+			this.nonSharedConnections.forEach(c => {
 				c.connect();
 			});
 		}
@@ -109,13 +109,13 @@ export default class Stream extends EventEmitter {
 
 			let connections: (Connection | undefined)[];
 
-			connections = this.sharedConnections.filter((c) => c.id === id);
+			connections = this.sharedConnections.filter(c => c.id === id);
 
 			if (connections.length === 0) {
-				connections = [this.nonSharedConnections.find((c) => c.id === id)];
+				connections = [this.nonSharedConnections.find(c => c.id === id)];
 			}
 
-			for (const c of connections.filter((c) => c != null)) {
+			for (const c of connections.filter(c => c != null)) {
 				c!.emit(body.type, body.body);
 				c!.emit('*', { type: body.type, body: body.body });
 			}

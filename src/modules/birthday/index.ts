@@ -33,7 +33,7 @@ export default class extends Module {
 			'user.birthday': { $regex: new RegExp('-' + today + '$') }
 		} as any);
 
-		birthFriends.forEach((f) => {
+		birthFriends.forEach(f => {
 			const friend = new Friend(this.ai, { doc: f });
 
 			// 親愛度が3以上必要

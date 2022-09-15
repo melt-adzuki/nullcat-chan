@@ -10,7 +10,7 @@ export default class NGWord {
 	constructor() {
 		const rs = fs.createReadStream('ngwords.txt');
 		const rl = readline.createInterface(rs);
-		rl.on('line', (line) => {
+		rl.on('line', line => {
 			const word = toHiragana(line.trim().toLowerCase());
 			if (word.startsWith('#')) return;
 			if (word.startsWith('-')) {
@@ -25,7 +25,7 @@ export default class NGWord {
 
 	excludeAllowedWord(str: string): string {
 		let text = toHiragana(str.toLowerCase());
-		this.excludedWords.forEach((w) => {
+		this.excludedWords.forEach(w => {
 			text = text.replace(w, '');
 		});
 		return text;
@@ -37,7 +37,7 @@ export default class NGWord {
 
 	addNGWord(str: string): boolean {
 		const word = toHiragana(str.trim().toLowerCase());
-		if (this.ngWords.some((ng) => word.includes(ng))) {
+		if (this.ngWords.some(ng => word.includes(ng))) {
 			return false;
 		} else {
 			this.ngWords.push(word);
@@ -47,8 +47,8 @@ export default class NGWord {
 
 	removeNGWord(str: string): boolean {
 		const word = toHiragana(str.trim().toLowerCase());
-		if (this.ngWords.some((ng) => word.includes(ng))) {
-			this.ngWords = this.ngWords.filter((ng) => ng !== word);
+		if (this.ngWords.some(ng => word.includes(ng))) {
+			this.ngWords = this.ngWords.filter(ng => ng !== word);
 			return true;
 		} else {
 			return false;
@@ -57,7 +57,7 @@ export default class NGWord {
 
 	addExcludedWord(str: string): boolean {
 		const word = toHiragana(str.trim().toLowerCase());
-		if (this.excludedWords.some((ng) => word.includes(ng))) {
+		if (this.excludedWords.some(ng => word.includes(ng))) {
 			return false;
 		} else {
 			this.excludedWords.push(word);
@@ -67,8 +67,8 @@ export default class NGWord {
 
 	removeExcludedWord(str: string): boolean {
 		const word = toHiragana(str.trim().toLowerCase());
-		if (this.excludedWords.some((ng) => word.includes(ng))) {
-			this.excludedWords = this.excludedWords.filter((e) => e !== word);
+		if (this.excludedWords.some(ng => word.includes(ng))) {
+			this.excludedWords = this.excludedWords.filter(e => e !== word);
 			return true;
 		} else {
 			return false;

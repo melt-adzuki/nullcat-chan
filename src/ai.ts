@@ -93,7 +93,7 @@ export default class 藍 {
 			autoload: true,
 			autosave: true,
 			autosaveInterval: 1000,
-			autoloadCallback: (err) => {
+			autoloadCallback: err => {
 				if (err) {
 					this.log(chalk.red(`Failed to load the memory: ${err}`));
 				} else {
@@ -141,7 +141,7 @@ export default class 藍 {
 		const mainStream = this.connection.useSharedConnection('main');
 
 		// メンションされたとき
-		mainStream.on('mention', async (data) => {
+		mainStream.on('mention', async data => {
 			if (data.userId == this.account.id) return; // 自分は弾く
 			if (data.text && data.text.startsWith('@' + this.account.username)) {
 				// Misskeyのバグで投稿が非公開扱いになる
@@ -151,7 +151,7 @@ export default class 藍 {
 		});
 
 		// 返信されたとき
-		mainStream.on('reply', async (data) => {
+		mainStream.on('reply', async data => {
 			if (data.userId == this.account.id) return; // 自分は弾く
 			if (data.text && data.text.startsWith('@' + this.account.username)) return;
 			// Misskeyのバグで投稿が非公開扱いになる
@@ -160,7 +160,7 @@ export default class 藍 {
 		});
 
 		// Renoteされたとき
-		mainStream.on('renote', async (data) => {
+		mainStream.on('renote', async data => {
 			if (data.userId == this.account.id) return; // 自分は弾く
 			if (data.text == null && (data.files || []).length == 0) return;
 
@@ -172,19 +172,19 @@ export default class 藍 {
 		});
 
 		// メッセージ
-		mainStream.on('messagingMessage', (data) => {
+		mainStream.on('messagingMessage', data => {
 			if (data.userId == this.account.id) return; // 自分は弾く
 			this.onReceiveMessage(new Message(this, data, true));
 		});
 
 		// 通知
-		mainStream.on('notification', (data) => {
+		mainStream.on('notification', data => {
 			this.onNotification(data);
 		});
 		//#endregion
 
 		// Install modules
-		this.modules.forEach((m) => {
+		this.modules.forEach(m => {
 			this.log(`Installing ${chalk.cyan.italic(m.name)}\tmodule...`);
 			m.init(this);
 			const res = m.install();

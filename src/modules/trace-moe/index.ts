@@ -35,7 +35,7 @@ export default class extends Module {
 			return null;
 		}
 
-		const filteredImageFiles = message.files.filter((file) => file.type.startsWith('image'));
+		const filteredImageFiles = message.files.filter(file => file.type.startsWith('image'));
 
 		if (!filteredImageFiles.length) {
 			this.log('No valid images found.');

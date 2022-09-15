@@ -29,7 +29,7 @@ const kanaMap: string[][] = [
  * @returns ひらがな
  */
 export function katakanaToHiragana(str: string): string {
-	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
+	return str.replace(/[\u30a1-\u30f6]/g, match => {
 		const char = match.charCodeAt(0) - 0x60;
 		return String.fromCharCode(char);
 	});
@@ -41,7 +41,7 @@ export function katakanaToHiragana(str: string): string {
  * @returns カタカナ
  */
 export function hiraganaToKatagana(str: string): string {
-	return str.replace(/[\u3041-\u3096]/g, (match) => {
+	return str.replace(/[\u3041-\u3096]/g, match => {
 		const char = match.charCodeAt(0) + 0x60;
 		return String.fromCharCode(char);
 	});
@@ -53,10 +53,10 @@ export function hiraganaToKatagana(str: string): string {
  * @returns 半角カタカナ
  */
 export function zenkakuToHankaku(str: string): string {
-	const reg = new RegExp('(' + kanaMap.map((x) => x[0]).join('|') + ')', 'g');
+	const reg = new RegExp('(' + kanaMap.map(x => x[0]).join('|') + ')', 'g');
 
 	return str
-		.replace(reg, (match) => kanaMap.find((x) => x[0] == match)![1])
+		.replace(reg, match => kanaMap.find(x => x[0] == match)![1])
 		.replace(/゛/g, 'ﾞ')
 		.replace(/゜/g, 'ﾟ');
 }
@@ -67,10 +67,10 @@ export function zenkakuToHankaku(str: string): string {
  * @returns 全角カタカナ
  */
 export function hankakuToZenkaku(str: string): string {
-	const reg = new RegExp('(' + kanaMap.map((x) => x[1]).join('|') + ')', 'g');
+	const reg = new RegExp('(' + kanaMap.map(x => x[1]).join('|') + ')', 'g');
 
 	return str
-		.replace(reg, (match) => kanaMap.find((x) => x[1] == match)![0])
+		.replace(reg, match => kanaMap.find(x => x[1] == match)![0])
 		.replace(/ﾞ/g, '゛')
 		.replace(/ﾟ/g, '゜');
 }

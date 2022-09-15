@@ -81,13 +81,13 @@ export default class extends Module {
 			return true;
 		}
 
-		const withSan = titles.some((t) => name.endsWith(t));
+		const withSan = titles.some(t => name.endsWith(t));
 
 		if (withSan) {
 			msg.friend.updateName(name);
 			msg.reply(serifs.core.setNameOk(name));
 		} else {
-			msg.reply(serifs.core.san).then((reply) => {
+			msg.reply(serifs.core.san).then(reply => {
 				this.subscribeReply(msg.userId, msg.isDm, msg.isDm ? msg.userId : reply.id, {
 					name: name
 				});
@@ -145,7 +145,7 @@ export default class extends Module {
 			msg.friend.updateName(data.name);
 			done();
 		} else {
-			msg.reply(serifs.core.yesOrNo).then((reply) => {
+			msg.reply(serifs.core.yesOrNo).then(reply => {
 				this.subscribeReply(msg.userId, msg.isDm, reply.id, data);
 			});
 		}

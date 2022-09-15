@@ -76,7 +76,7 @@ export default class Message {
 			.api('users/show', {
 				userId: this.userId
 			})
-			.then((user) => {
+			.then(user => {
 				this.friend.updateUser(user);
 			});
 	}

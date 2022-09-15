@@ -54,7 +54,7 @@ function log(msg: string): void {
 log(chalk.bold(`Nullcat chan! v${pkg._v}`));
 
 promiseRetry(
-	(retry) => {
+	retry => {
 		log(`Account fetching... ${chalk.gray(config.host)}`);
 
 		// アカウントをフェッチ
@@ -70,7 +70,7 @@ promiseRetry(
 		retries: 3
 	}
 )
-	.then((account) => {
+	.then(account => {
 		const acct = `@${account.username}`;
 		log(chalk.green(`Account fetched successfully: ${chalk.underline(acct)}`));
 
@@ -107,6 +107,6 @@ promiseRetry(
 			new AyashiiModule()
 		]);
 	})
-	.catch((e) => {
+	.catch(e => {
 		log(chalk.red('Failed to fetch the account'));
 	});

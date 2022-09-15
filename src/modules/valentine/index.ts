@@ -28,7 +28,7 @@ export default class extends Module {
 
 		const friends = this.ai.friends.find({} as any);
 
-		friends.forEach((f) => {
+		friends.forEach(f => {
 			const friend = new Friend(this.ai, { doc: f });
 
 			// 親愛度が5以上必要

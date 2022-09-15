@@ -35,7 +35,7 @@ export default class extends Module {
 	public versionCheck = () => {
 		// バージョンチェック
 		this.getVersion()
-			.then((fetched) => {
+			.then(fetched => {
 				this.log(`Version fetched: ${JSON.stringify(fetched)}`);
 
 				if (this.latest != null && fetched != null) {
@@ -55,7 +55,7 @@ export default class extends Module {
 
 				this.latest = fetched;
 			})
-			.catch((e) => this.log(`warn: ${e}`));
+			.catch(e => this.log(`warn: ${e}`));
 	};
 
 	@autobind
@@ -68,7 +68,7 @@ export default class extends Module {
 
 		this.ai
 			.api('meta')
-			.then((meta) => {
+			.then(meta => {
 				msg.reply(`${this.mfmVersion(meta.version)} みたいだよ！`);
 			})
 			.catch(() => {
@@ -82,7 +82,7 @@ export default class extends Module {
 	 * バージョンを取得する
 	 */
 	private getVersion = (): Promise<Version> => {
-		return this.ai.api('meta').then((meta) => {
+		return this.ai.api('meta').then(meta => {
 			return {
 				server: meta.version,
 				client: meta.clientVersion
@@ -96,7 +96,7 @@ export default class extends Module {
 	};
 
 	private wait = (ms: number): Promise<void> => {
-		return new Promise((resolve) => {
+		return new Promise(resolve => {
 			setTimeout(() => resolve(), ms);
 		});
 	};
