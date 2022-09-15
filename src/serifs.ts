@@ -2,17 +2,17 @@
 
 export default {
 	core: {
-		setNameOk: name => `わかった！今度から${name}って呼ぶね！`,
+		setNameOk: (name) => `わかった！今度から${name}って呼ぶね！`,
 
 		san: 'さん付けした方がいいかな？',
 
 		yesOrNo: 'ごめんね...僕「うん」か「いいえ」しかわからないんだ...',
 
-		hello: name => name ? `やっほぉ${name}` : `やっほぉ！`,
+		hello: (name) => (name ? `やっほぉ${name}` : `やっほぉ！`),
 
-		helloNight: name => name ? `こんばんわ${name}！` : `こんばんわ～！`,
+		helloNight: (name) => (name ? `こんばんわ${name}！` : `こんばんわ～！`),
 
-		goodMorning: (tension, name) => name ? `おはよ${name}！${tension}` : `おはよ！${tension}`,
+		goodMorning: (tension, name) => (name ? `おはよ${name}！${tension}` : `おはよ！${tension}`),
 
 		/*
 		goodMorning: {
@@ -22,54 +22,30 @@ export default {
 		},
 */
 
-		goodNight: name => name ? `おやすみ${name}！` : 'おやすみ！',
+		goodNight: (name) => (name ? `おやすみ${name}！` : 'おやすみ！'),
 
-		omedeto: name => name ? `ありがと～${name}！` : 'ありがと～！',
+		omedeto: (name) => (name ? `ありがと～${name}！` : 'ありがと～！'),
 
 		erait: {
-			general: name => name ? [
-				`${name}、今日もえらい！`,
-				`${name}、今日もえらいね！`
-			] : [
-				`今日もえらい！`,
-				`今日もえらいね！`
-			],
+			general: (name) => (name ? [`${name}、今日もえらい！`, `${name}、今日もえらいね！`] : [`今日もえらい！`, `今日もえらいね！`]),
 
-			specify: (thing, name) => name ? [
-				`${name}、${thing}てえらい！`,
-				`${name}、${thing}てえらいね！`
-			] : [
-				`${thing}てえらい！`,
-				`${thing}てえらいね！`
-			],
+			specify: (thing, name) => (name ? [`${name}、${thing}てえらい！`, `${name}、${thing}てえらいね！`] : [`${thing}てえらい！`, `${thing}てえらいね！`]),
 
-			specify2: (thing, name) => name ? [
-				`${name}、${thing}でえらい！`,
-				`${name}、${thing}でえらいね！`
-			] : [
-				`${thing}でえらい！`,
-				`${thing}でえらいね！`
-			],
+			specify2: (thing, name) => (name ? [`${name}、${thing}でえらい！`, `${name}、${thing}でえらいね！`] : [`${thing}でえらい！`, `${thing}でえらいね！`])
 		},
 
 		okaeri: {
-			love: name => name ? [
-				`おかえり${name}！`,
-				`おかえりぃ${name}～`
-			] : [
-				'おかえり！',
-				'おかえりぃ～'
-			],
+			love: (name) => (name ? [`おかえり${name}！`, `おかえりぃ${name}～`] : ['おかえり！', 'おかえりぃ～']),
 
-			love2: name => name ? `おかえり～～！！${name}今日も偉いね:love_nullcatchan:` : 'おかえり～～！！今日も偉いね:love_nullcatchan:',
+			love2: (name) => (name ? `おかえり～～！！${name}今日も偉いね:love_nullcatchan:` : 'おかえり～～！！今日も偉いね:love_nullcatchan:'),
 
-			normal: name => name ? `おかえり${name}！` : 'おかえり！',
+			normal: (name) => (name ? `おかえり${name}！` : 'おかえり！')
 		},
 
 		itterassyai: {
-			love: name => name ? `いってらっしゃい${name}！` : 'いってらっしゃい！',
+			love: (name) => (name ? `いってらっしゃい${name}！` : 'いってらっしゃい！'),
 
-			normal: name => name ? `いってらっしゃい${name}！` : 'いってらっしゃい！',
+			normal: (name) => (name ? `いってらっしゃい${name}！` : 'いってらっしゃい！')
 		},
 
 		tooLong: '長すぎる..',
@@ -89,7 +65,7 @@ export default {
 
 			hate3: 'きもい',
 
-			hate4: '..？',
+			hate4: '..？'
 		},
 
 		kawaii: {
@@ -103,7 +79,7 @@ export default {
 		suki: {
 			normal: 'えへへ。ありがと～！',
 
-			love: name => `僕も${name}のこと好き！`,
+			love: (name) => `僕も${name}のこと好き！`,
 
 			hate: null
 		},
@@ -132,22 +108,22 @@ export default {
 			hate: '？'
 		},
 
-		itai: name => name ? `${name}大丈夫？なでなで` : '大丈夫？なでなで',
+		itai: (name) => (name ? `${name}大丈夫？なでなで` : '大丈夫？なでなで'),
 
 		turai: {
-			love: name => name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！',
+			love: (name) => (name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！'),
 
-			normal: name => name ? `${name}なでなで` : 'なでなで',
+			normal: (name) => (name ? `${name}なでなで` : 'なでなで'),
 
-			hate: 'ん～。がんばって',
+			hate: 'ん～。がんばって'
 		},
 
 		kurusii: {
-			love: name => name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！',
+			love: (name) => (name ? `${name}なでなで ぽんぽんぎゅ～！` : 'なでなで ぽんぽんぎゅ～！'),
 
-			normal: name => name ? `${name}なでなで` : 'なでなで',
+			normal: (name) => (name ? `${name}なでなで` : 'なでなで'),
 
-			hate: 'ん～。がんばって',
+			hate: 'ん～。がんばって'
 		},
 
 		ote: {
@@ -155,18 +131,18 @@ export default {
 
 			love1: 'にゃ～！ぼくは犬じゃないよぉ',
 
-			love2: 'にゃにゃにゃ！',
+			love2: 'にゃにゃにゃ！'
 		},
 
 		shutdown: 'ぼくまだ眠くない...',
 
 		transferNeedDm: 'わかった！二人っきりでお話ししたいな',
 
-		transferCode: code => `わかった！\n合言葉は「${code}」だよ！`,
+		transferCode: (code) => `わかった！\n合言葉は「${code}」だよ！`,
 
 		transferFailed: 'うーん、合言葉違うみたい',
 
-		transferDone: name => name ? `んみゃ..！ おかえり${name}！` : `んみゃ...！ おかえりなさい！`,
+		transferDone: (name) => (name ? `んみゃ..！ おかえり${name}！` : `んみゃ...！ おかえりなさい！`)
 	},
 
 	keyword: {
@@ -176,14 +152,14 @@ export default {
 	},
 
 	birthday: {
-		happyBirthday: name => name ? `お誕生日おめでと～～～！！！${name}！！！！！！` : 'お誕生日おめでと～～～～～！！！',
+		happyBirthday: (name) => (name ? `お誕生日おめでと～～～！！！${name}！！！！！！` : 'お誕生日おめでと～～～～～！！！')
 	},
 
 	/**
 	 * 占い
 	 */
 	fortune: {
-		cw: name => name ? `今日の${name}の運勢を占ったよ！` : '今日のきみの運勢を占ったよ！',
+		cw: (name) => (name ? `今日の${name}の運勢を占ったよ！` : '今日のきみの運勢を占ったよ！')
 	},
 
 	/**
@@ -196,7 +172,7 @@ export default {
 
 		tooLong: '長すぎる…',
 
-		notify: (time, name) => name ? `${name}！！${time}経ったよ！` : `${time}経ったよ！`
+		notify: (time, name) => (name ? `${name}！！${time}経ったよ！` : `${time}経ったよ！`)
 	},
 
 	/**
@@ -208,23 +184,15 @@ export default {
 		reminds: 'やること一覧だよ！',
 		none: 'やることはないよ！',
 
-		notify: (name) => name ? `${name}これやった？` : `これやった？`,
+		notify: (name) => (name ? `${name}これやった？` : `これやった？`),
 
-		notifyWithThing: (thing, name) => name ? `${name}「${thing}」やった？` : `「${thing}」やった？`,
+		notifyWithThing: (thing, name) => (name ? `${name}「${thing}」やった？` : `「${thing}」やった？`),
 
-		done: (name) => name ? [
-			`すごい！！天才！！${name}えらい！！`,
-			`${name}さすがすぎる！！！`,
-			`${name}えらすぎる！！`,
-		] : [
-			`すごい！！天才！！えらい！！`,
-			`さすがすぎる！！！`,
-			`えらすぎる！！`,
-		],
+		done: (name) => (name ? [`すごい！！天才！！${name}えらい！！`, `${name}さすがすぎる！！！`, `${name}えらすぎる！！`] : [`すごい！！天才！！えらい！！`, `さすがすぎる！！！`, `えらすぎる！！`]),
 
 		doneFromInvalidUser: 'イタズラしちゃダメ！',
 
-		cancel: `OK！`,
+		cancel: `OK！`
 	},
 
 	server: {
@@ -234,18 +202,18 @@ export default {
 	/**
 	 * ろぐぼ
 	 */
-	 rogubo: 'ログボ！！',
+	rogubo: 'ログボ！！',
 
 	/**
 	 * バレンタイン
 	 */
 	valentine: {
-		chocolateForYou: name => name ? `${name}！チョコあげる！` : 'チョコあげる！',
+		chocolateForYou: (name) => (name ? `${name}！チョコあげる！` : 'チョコあげる！')
 	},
 
 	sleepReport: {
-		report: hours => `んぬぁ～、${hours}時間くらいねちゃってたかも`,
-		reportUtatane: 'ぬぁ... ',
+		report: (hours) => `んぬぁ～、${hours}時間くらいねちゃってたかも`,
+		reportUtatane: 'ぬぁ... '
 	},
 
 	noting: {
@@ -270,9 +238,9 @@ export default {
 			'ぬぁ～ん',
 			'にﾞ',
 			'ぎゅ～～～',
-			'むぅ',
-		],
-	},
+			'むぅ'
+		]
+	}
 };
 
 export function getSerif(variant: string | string[]): string {
@@ -282,4 +250,3 @@ export function getSerif(variant: string | string[]): string {
 		return variant;
 	}
 }
-

@@ -1,34 +1,34 @@
-import autobind from "autobind-decorator"
-import Module from "@/module"
-import serifs from "@/serifs"
-import config from "@/config"
+import autobind from 'autobind-decorator';
+import Module from '@/module';
+import serifs from '@/serifs';
+import config from '@/config';
 
 export default class extends Module {
-	public readonly name = "noting"
+	public readonly name = 'noting';
 
 	@autobind
 	public install() {
-		if (config.notingEnabled === false) return {}
+		if (config.notingEnabled === false) return {};
 
 		setInterval(() => {
 			if (Math.random() < 0.1) {
-				this.post()
+				this.post();
 			}
-		}, 1000 * 60 * 10)
+		}, 1000 * 60 * 10);
 
-		return {}
+		return {};
 	}
 
 	@autobind
 	private post() {
-		const notes = serifs.noting.notes
+		const notes = serifs.noting.notes;
 
-		const note = notes[Math.floor(Math.random() * notes.length)]
+		const note = notes[Math.floor(Math.random() * notes.length)];
 
 		// TODO: 季節に応じたセリフ
 
 		this.ai.post({
-			text: note,
-		})
+			text: note
+		});
 	}
 }
