@@ -1,34 +1,14 @@
-import config from "@/config"
-import Friend from "@/friend"
-import { User } from "@/misskey/user"
-import 藍 from "@/ai"
-import includes from "@/utils/includes"
-import or from "@/utils/or"
 import autobind from "autobind-decorator"
 import * as chalk from "chalk"
 const delay = require("timeout-as-promise")
 
-interface MisskeyFile {
-	id: string
-	createdAt: string
-	name: string
-	type: string
-	md5: string
-	size: number
-	isSensitive: boolean
-	blurhash: string | null
-	properties: {
-		width?: number
-		height?: number
-	}
-	url: string
-	thumbnailUrl: string | null
-	comment?: unknown | null // FIXME
-	folderId: string | null
-	folder?: unknown | null // FIXME
-	userId: string | null
-	user: User | null
-}
+import 藍 from "@/ai"
+import Friend from "@/friend"
+import { User } from "@/misskey/user"
+import { MisskeyFile } from "@/misskey/file"
+import includes from "@/utils/includes"
+import or from "@/utils/or"
+import config from "@/config"
 
 export default class Message {
 	private ai: 藍
@@ -62,6 +42,11 @@ export default class Message {
 	public get files(): MisskeyFile[] | undefined {
 		return this.messageOrNote.files
 	}
+
+	public get visibility(): string {
+		return this.messageOrNote.visibility
+	}
+
 	/**
 	 * メンション部分を除いたテキスト本文
 	 */

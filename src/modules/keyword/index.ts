@@ -1,10 +1,10 @@
-import config from "@/config"
-import Message from "@/message"
-import Module from "@/module"
-import serifs from "@/serifs"
-import NGWord from "@/ng-words";
 import autobind from "autobind-decorator"
 import * as loki from "lokijs"
+import Message from "@/message"
+import Module from "@/module"
+import NGWord from "@/ng-words"
+import config from "@/config"
+import serifs from "@/serifs"
 import { mecab } from "./mecab"
 
 function kanaToHira(str: string) {

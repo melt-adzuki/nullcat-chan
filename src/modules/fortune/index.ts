@@ -1,9 +1,9 @@
-import Message from "@/message"
-import Module from "@/module"
-import serifs from "@/serifs"
-import { genItem } from "@/vocabulary"
 import autobind from "autobind-decorator"
+import Module from "@/module"
+import Message from "@/message"
+import serifs from "@/serifs"
 import * as seedrandom from "seedrandom"
+import { genItem } from "@/vocabulary"
 
 export const blessing = ["にゃん吉🐈", "みゃ～吉🐾", "ぬるきゃっと吉:love_nullcatchan:", "なんかすごい吉✨", "特大吉✨", "大大吉🎊", "大吉🎊", "吉🎉", "中吉🎉", "小吉🎉", "凶🗿", "大凶🗿"]
 

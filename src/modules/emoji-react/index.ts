@@ -1,9 +1,11 @@
+import autobind from "autobind-decorator"
+import { parse } from "twemoji-parser"
+const delay = require("timeout-as-promise")
+
 import { Note } from "@/misskey/note"
 import Module from "@/module"
 import Stream from "@/stream"
 import includes from "@/utils/includes"
-import autobind from "autobind-decorator"
-const delay = require("timeout-as-promise")
 
 const gomamayo = require("gomamayo-js")
 

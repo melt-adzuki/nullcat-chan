@@ -1,9 +1,9 @@
-import Message from "@/message"
-import Module from "@/module"
+import autobind from "autobind-decorator"
 import { HandlerResult } from "@/ai"
+import Module from "@/module"
+import Message from "@/message"
 import serifs, { getSerif } from "@/serifs"
 import getDate from "@/utils/get-date"
-import autobind from "autobind-decorator"
 
 export default class extends Module {
 	public readonly name = "talk"
@@ -262,7 +262,7 @@ export default class extends Module {
 
 	@autobind
 	private itai(msg: Message): boolean {
-		if (!msg.or(["痛い", "いたい"])) return false
+		if (!msg.or(["痛い", "いたい"]) && !msg.extractedText.endsWith("痛い")) return false
 
 		// メッセージのみ
 		if (!msg.isDm) return true

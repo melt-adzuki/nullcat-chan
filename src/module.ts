@@ -1,5 +1,5 @@
-import 藍, { InstallerResult } from "@/ai"
 import autobind from "autobind-decorator"
+import 藍, { InstallerResult } from "@/ai"
 
 export default abstract class Module {
 	public abstract readonly name: string

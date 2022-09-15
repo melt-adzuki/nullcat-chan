@@ -1,20 +1,20 @@
 // AI CORE
 
-import config from "@/config"
-import Friend, { FriendDoc } from "@/friend"
-import Message from "@/message"
-import { User } from "@/misskey/user"
-import Module from "@/module"
-import Stream from "@/stream"
-import log from "@/utils/log"
-import autobind from "autobind-decorator"
-import * as chalk from "chalk"
 import * as fs from "fs"
+import autobind from "autobind-decorator"
 import * as loki from "lokijs"
 import * as request from "request-promise-native"
+import * as chalk from "chalk"
 import { v4 as uuid } from "uuid"
 const delay = require("timeout-as-promise")
 
+import config from "@/config"
+import Module from "@/module"
+import Message from "@/message"
+import Friend, { FriendDoc } from "@/friend"
+import { User } from "@/misskey/user"
+import Stream from "@/stream"
+import log from "@/utils/log"
 const pkg = require("../package.json")
 
 type MentionHook = (msg: Message) => Promise<boolean | HandlerResult>
@@ -385,7 +385,6 @@ export default class 藍 {
 		if (process.env.NODE_ENV === "production") {
 			const res = await this.api("notes/create", param)
 			return res.createdNote
-
 		} else {
 			log(chalk`[{magenta Debug:Post}]: ${JSON.stringify(param)}`)
 			return null
@@ -407,7 +406,6 @@ export default class 藍 {
 					param
 				)
 			)
-			
 		} else {
 			log(chalk`[{magenta Debug:SendMessage}]: userId: ${userId}`)
 			log(chalk`[{magenta Debug:SendMessage}]: param: ${JSON.stringify(param)}`)

@@ -1,9 +1,9 @@
-import { User } from "@/misskey/user"
-import IModule from "@/module"
-import 藍 from "@/ai"
-import getDate from "@/utils/get-date"
-import { genItem } from "@/vocabulary"
 import autobind from "autobind-decorator"
+import 藍 from "@/ai"
+import IModule from "@/module"
+import getDate from "@/utils/get-date"
+import { User } from "@/misskey/user"
+import { genItem } from "@/vocabulary"
 
 export type FriendDoc = {
 	userId: string

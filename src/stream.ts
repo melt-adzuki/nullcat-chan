@@ -1,8 +1,8 @@
 import autobind from "autobind-decorator"
 import { EventEmitter } from "events"
 import * as WebSocket from "ws"
-import config from "./config"
 const ReconnectingWebsocket = require("reconnecting-websocket")
+import config from "./config"
 
 /**
  * Misskey stream connection

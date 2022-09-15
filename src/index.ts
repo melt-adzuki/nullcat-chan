@@ -1,42 +1,45 @@
 // AiOS bootstrapper
 
-import * as chalk from "chalk"
 import "module-alias/register"
+
+import * as chalk from "chalk"
 import * as request from "request-promise-native"
+const promiseRetry = require("promise-retry")
+
+import 藍 from "./ai"
 import config from "./config"
-import BirthdayModule from "./modules/birthday"
+import _log from "./utils/log"
+const pkg = require("../package.json")
+
 import CoreModule from "./modules/core"
+import TalkModule from "./modules/talk"
+import BirthdayModule from "./modules/birthday"
+import PingModule from "./modules/ping"
 import EmojiReactModule from "./modules/emoji-react"
-import FeelingModule from "./modules/feeling"
-import FollowModule from "./modules/follow"
 import FortuneModule from "./modules/fortune"
+import KeywordModule from "./modules/keyword"
+import TimerModule from "./modules/timer"
+import ServerModule from "./modules/server"
+import FollowModule from "./modules/follow"
+import ValentineModule from "./modules/valentine"
+import SleepReportModule from "./modules/sleep-report"
+import NotingModule from "./modules/noting"
+import ReminderModule from "./modules/reminder"
+
+// Additional modules
+import FeelingModule from "./modules/feeling"
 import GitHubStatusModule from "./modules/github-status"
-import CloudflareStatus from "./modules/cloudflare-status";
+import CloudflareStatus from "./modules/cloudflare-status"
 import GomamayoModule from "./modules/gomamayo"
 import JihouModule from "./modules/jihou"
-import KeywordModule from "./modules/keyword"
 import KiatsuModule from "./modules/kiatsu"
-import NotingModule from "./modules/noting"
-import PingModule from "./modules/ping"
-import ReminderModule from "./modules/reminder"
 import RoguboModule from "./modules/rogubo"
-import ServerModule from "./modules/server"
-import SleepReportModule from "./modules/sleep-report"
-import TalkModule from "./modules/talk"
-import TimerModule from "./modules/timer"
 import TraceMoeModule from "./modules/trace-moe"
-import ValentineModule from "./modules/valentine"
 import WhatModule from "./modules/what"
 import YarukotoModule from "./modules/yarukoto"
-import 藍 from "./ai"
-import _log from "./utils/log"
 import ShellGeiModule from "./modules/shellgei"
 import SversionModule from "./modules/Sversion"
 import AyashiiModule from "./modules/ayashii"
-
-const promiseRetry = require("promise-retry")
-
-const pkg = require("../package.json")
 
 console.log("    _   __      ____           __  ________                __     ")
 console.log("   / | / /_  __/ / /________ _/ /_/ ____/ /_  ____ _____  / /     ")
@@ -80,6 +83,8 @@ promiseRetry(
 			new FortuneModule(),
 			new TimerModule(),
 			new TalkModule(),
+			new PingModule(),
+			new ServerModule(),
 			new FollowModule(),
 			new BirthdayModule(),
 			new ValentineModule(),
@@ -97,11 +102,9 @@ promiseRetry(
 			new WhatModule(),
 			new FeelingModule(),
 			new TraceMoeModule(),
-			new ServerModule(),
 			new ShellGeiModule(),
 			new SversionModule(),
 			new AyashiiModule(),
-			new PingModule(),
 		])
 	})
 	.catch((e) => {

@@ -222,6 +222,8 @@ export default {
 			`えらすぎる！！`,
 		],
 
+		doneFromInvalidUser: 'イタズラしちゃダメ！',
+
 		cancel: `OK！`,
 	},
 

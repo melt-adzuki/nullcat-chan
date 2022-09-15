@@ -1,8 +1,8 @@
-import Message from "@/message"
+import autobind from "autobind-decorator"
 import Module from "@/module"
+import Message from "@/message"
 import serifs from "@/serifs"
 import { safeForInterpolate } from "@/utils/safe-for-interpolate"
-import autobind from "autobind-decorator"
 
 const titles = ["さん", "くん", "君", "ちゃん", "様", "先生"]
 
@@ -141,7 +141,7 @@ export default class extends Module {
 		if (msg.text.includes("うん")) {
 			msg.friend.updateName(data.name + "ちゃん")
 			done()
-		} else if (msg.text.includes("ううん")) {
+		} else if (msg.text.includes("いいえ")) {
 			msg.friend.updateName(data.name)
 			done()
 		} else {
